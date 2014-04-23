@@ -1,0 +1,20 @@
+# $Id: PKGBUILD 184218 2013-05-03 23:40:33Z dreisner $
+# Maintainer: Eric Bélanger <eric@archlinux.org>
+
+pkgname=btrfs-completion
+pkgver=0.1
+pkgrel=1
+pkgdesc="Programmable completion for the bash shell (btrfs)"
+arch=('any')
+url="http://bash-completion.alioth.debian.org/"
+license=('GPL')
+depends=('bash' 'bash-completion' 'btrfs-progs')
+options=('!emptydirs' '!makeflags')
+source=(http://forumi0721.iptime.org:81/gentoo/distfiles/${pkgname}-${pkgver}.zip)
+md5sums=('24900849792a73fee185bb8a7687fcf9')
+
+package() {
+  cd ${pkgname}-${pkgver}
+  mkdir -p "${pkgdir}/usr/share/bash-completion/completions/"
+  cp btrfs "${pkgdir}/usr/share/bash-completion/completions/"
+}
