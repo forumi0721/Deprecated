@@ -5,7 +5,7 @@ pkgname=pkgfile
 pkgver=13
 pkgrel=1
 pkgdesc="a pacman .files metadata explorer"
-arch=('i686' 'x86_64')
+arch=('armv6h' 'i686' 'x86_64')
 url="http://github.com/falconindy/pkgfile"
 license=('MIT')
 depends=('libarchive' 'curl' 'pcre' 'pacman')
@@ -19,7 +19,9 @@ md5sums=('7b4e20bf3ec6604cd439d5acd6ca871d'
 build() {
   cd "$pkgname-$pkgver"
 
-  patch -p1 -i ${srcdir}/pkgfile.patch
+  if [ "${CARCH}" == "armv6h" ]; then
+    patch -p1 -i ${srcdir}/pkgfile.patch
+  fi
 
   ./configure
   make
