@@ -1,0 +1,24 @@
+diff -urpN a/src/update.c b/src/update.c
+--- a/src/update.c	1970-01-01 09:21:40.620000000 +0900
++++ b/src/update.c	1970-01-01 09:23:03.240000000 +0900
+@@ -616,7 +616,7 @@ static int reap_children(struct repovec_
+ int pkgfile_update(struct repovec_t *repos, struct config_t *config) {
+   int r, xfer_count = 0, ret = 0;
+   struct repo_t *repo;
+-  struct utsname un;
++  //struct utsname un;
+   CURLM *curl_multi;
+   off_t total_xfer = 0;
+   double t_start, duration;
+@@ -638,8 +638,9 @@ int pkgfile_update(struct repovec_t *rep
+   }
+ 
+   if (repos->architecture == NULL) {
+-    uname(&un);
+-    repos->architecture = strdup(un.machine);
++  //  uname(&un);
++  //  repos->architecture = strdup(un.machine);
++    repos->architecture = strdup("armv6h");
+   }
+ 
+   /* ensure all our DBs are 0644 */
