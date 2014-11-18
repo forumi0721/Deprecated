@@ -3,16 +3,16 @@
 # Maintainer: Uroš Vampl <mobile.leecher at gmail dot com>
 
 pkgname=vlmcsd
-pkgver=20140125
+pkgver=20141003
 pkgrel=0
 pkgdesc="KMS emulator."
-arch=('armv6h i686' 'x86_64')
-url="http://forums.mydigitallife.info/threads/50234-Emulated-KMS-Servers-on-non-Windows-platforms/page26"
+arch=('arm' 'armv6h i686' 'x86_64')
+url="http://forums.mydigitallife.info/threads/50234-Emulated-KMS-Servers-on-non-Windows-platforms/"
 license=('GPL')
-source=(http://forumi0721.iptime.org:81/distfiles/vlmcsd-$pkgver.tar.gz
+source=(http://forumi0721.iptime.org:8000/distfiles/vlmcsd-$pkgver.tar.gz
 		vlmcsd.service
 		vlmcsd.ini)
-md5sums=('fbfd3d4b578a06f2c8486feedfc7ecdd'
+md5sums=('dd56d8ff8bff49bdc232fd7653245609'
 		'9a6d2dcd0848dc3e7633c6ec4bbc4f97'
 		'6d877167748aba342c4f1d0c7931851f')
 
@@ -27,6 +27,7 @@ package() {
 
   mkdir -p "${pkgdir}/usr/bin/"
   cp vlmcsd "${pkgdir}/usr/bin/"
+  cp vlmcs "${pkgdir}/usr/bin/"
 
   mkdir -p "${pkgdir}/etc/"
   cp ../../vlmcsd.ini "${pkgdir}/etc/"

@@ -12,7 +12,7 @@ url='http://www-old.gnome.org/fonts/'
 depends=('fontconfig' 'xorg-fonts-encodings' 'xorg-font-utils')
 provides=('ttf-font')
 install=vera.install
-source=("http://forumi0721.iptime.org:81/distfiles/${pkgname}-${pkgver}.tar.bz2")
+source=("http://forumi0721.iptime.org:8000/distfiles/${pkgname}-${pkgver}.tar.bz2")
 md5sums=('901122a7aa99a7d25f4b78d762e5115e')
 
 package() {
