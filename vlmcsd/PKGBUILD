@@ -9,7 +9,7 @@ pkgdesc="KMS emulator."
 arch=('arm' 'armv6h i686' 'x86_64')
 url="http://forums.mydigitallife.info/threads/50234-Emulated-KMS-Servers-on-non-Windows-platforms/"
 license=('GPL')
-source=(http://forumi0721.iptime.org:8000/distfiles/vlmcsd-$pkgver.tar.gz
+source=(http://forumi0721.ipdisk.co.kr:8000/distfiles/vlmcsd-$pkgver.tar.gz
 		vlmcsd.service)
 md5sums=('dd56d8ff8bff49bdc232fd7653245609'
 		'197306c5f3bc511fce5f7b30f747a3f6')

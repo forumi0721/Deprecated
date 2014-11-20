@@ -10,7 +10,7 @@ url="http://bash-completion.alioth.debian.org/"
 license=('GPL')
 depends=('bash' 'bash-completion' 'btrfs-progs')
 options=('!emptydirs' '!makeflags')
-source=(http://forumi0721.iptime.org:8000/gentoo/distfiles/${pkgname}-${pkgver}.zip)
+source=(http://forumi0721.ipdisk.co.kr:8000/distfiles/${pkgname}-${pkgver}.zip)
 md5sums=('24900849792a73fee185bb8a7687fcf9')
 
 package() {
