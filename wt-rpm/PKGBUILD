@@ -9,13 +9,13 @@ pkgdesc="Remote Power Managemant"
 arch=('armv6h')
 url="https://gitorious.org/wt-rpm"
 license=('GPL')
-depends=('wt' 'boost-libs')
-makedepends=('wt' 'gcc' 'cmake' 'boost')
+depends=('wt' 'wiringpi' 'boost-libs')
+makedepends=('wt' 'wiringpi' 'boost' 'gcc' 'cmake')
 
 source=(http://forumi0721.ipdisk.co.kr:8000/distfiles/${pkgname}-${pkgver}.tar.gz
 	http://forumi0721.ipdisk.co.kr:8000/distfiles/wt-rpm.json)
 
-md5sums=('3a47b33287aa2b9ecedb028dca087a9a'
+md5sums=('bd30e35b691f266f3857b7f465c862a7'
 	'09e4a659cf1dbf63dec1d052e50e40a8')
 
 build() {
@@ -35,7 +35,7 @@ package() {
 	install -d ${pkgdir}/usr/share/wtrpm
 	install -m644 green_light.png ${pkgdir}/usr/share/wtrpm/
 	install -m644 off_light.png ${pkgdir}/usr/share/wtrpm/
-	install -m644 ping.png ${pkgdir}/usr/share/wtrpm/
+	#install -m644 ping.png ${pkgdir}/usr/share/wtrpm/
 	install -m644 power-button.png ${pkgdir}/usr/share/wtrpm/
 
 	cd ${srcdir}/${pkgname}
