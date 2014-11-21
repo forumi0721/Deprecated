@@ -1,22 +1,18 @@
-# $Id: PKGBUILD 175098 2013-01-13 15:03:36Z foutrelis $
-# Maintainer: Thayer Williams <thayer@archlinux.org>
-# Contributor: dorphell <dorphell@archlinux.org>
-
 pkgname=ttf-bitstream-vera-sans-mono
 pkgver=0.1
 pkgrel=1
 pkgdesc="Bitstream vera sans mono font"
-arch=('any')
-license=('custom')
-url='http://www-old.gnome.org/fonts/'
-depends=('fontconfig' 'xorg-fonts-encodings' 'xorg-font-utils')
-provides=('ttf-font')
+arch=("any")
+license=("custom")
+url="http://www-old.gnome.org/fonts/"
+depends=("fontconfig" "xorg-fonts-encodings" "xorg-font-utils")
+provides=("ttf-font")
 install=vera.install
 source=("http://forumi0721.iptime.org:8000/distfiles/${pkgname}-${pkgver}.tar.bz2")
-md5sums=('901122a7aa99a7d25f4b78d762e5115e')
+md5sums=("901122a7aa99a7d25f4b78d762e5115e")
 
 package() {
-  cd ${srcdir}/${pkgname}-${pkgver}
-  install -d ${pkgdir}/usr/share/fonts/TTF
-  install -m644 *.ttf ${pkgdir}/usr/share/fonts/TTF/
+	cd ${srcdir}/${pkgname}-${pkgver}
+	install -d ${pkgdir}/usr/share/fonts/TTF
+	install -m644 *.ttf ${pkgdir}/usr/share/fonts/TTF/
 }

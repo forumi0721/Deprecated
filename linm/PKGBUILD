@@ -2,29 +2,28 @@
 # Contributor: Yura Siamashka <yurand2@gmail.com>
 # Contributor: Kyle Keen <keenerd@gmail.com>
 
-pkgname='linm'
-pkgver='0.8.1'
-pkgrel='3'
-pkgdesc='A console file manager with many features'
-arch=('arm' 'armv6h' 'i686' 'x86_64')
-url='http://kldp.net/projects/mls/'
-license=('GPL')
-depends=('ncurses' 'openssl')
-
-md5sums=('10af8ec824b3e75d3602dad66d073655'
-  'fc87b4e916f136fa3c111e9ee0f86b44')
+pkgname="linm"
+pkgver="0.8.1"
+pkgrel="3"
+pkgdesc="A console file manager with many features"
+arch=("arm" "armv6h" "i686" "x86_64")
+url="http://kldp.net/projects/mls/"
+license=("GPL")
+depends=("ncurses" "openssl")
 source=("http://kldp.net/frs/download.php/4508/${pkgname}_$pkgver-1.tar.gz"
-  "http://forumi0721.ipdisk.co.kr:8000/distfiles/linm_0.8.1-1-configfix.patch")
+	"http://forumi0721.ipdisk.co.kr:8000/distfiles/linm_0.8.1-1-configfix.patch")
+md5sums=("10af8ec824b3e75d3602dad66d073655"
+	"fc87b4e916f136fa3c111e9ee0f86b44")
 
 build() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
-  sed -i 's|libsmbclient.h|samba-4.0/&|' panel/vfs/samba/SMBReader.cpp
-  patch -p1 -i "${srcdir}/linm_0.8.1-1-configfix.patch"
-  ./configure --prefix=/usr
-  make
+	cd ${srcdir}/${pkgname}-${pkgver}
+	sed -i "s|libsmbclient.h|samba-4.0/&|" panel/vfs/samba/SMBReader.cpp
+	patch -p1 -i ${srcdir}/linm_0.8.1-1-configfix.patch
+	./configure --prefix=/usr
+	make
 }
 
 package() {
-  cd "${srcdir}/${pkgname}-${pkgver}"
-  make DESTDIR="$pkgdir" install
+	cd ${srcdir}/${pkgname}-${pkgver}
+	make DESTDIR=$pkgdir install
 }

@@ -1,23 +1,17 @@
-# $Id: PKGBUILD 104076 2014-01-15 09:51:50Z spupykin $
-# Maintainer: Sergej Pupykin <pupykin.s+arch@gmail.com>
-# Maintainer: Uroš Vampl <mobile.leecher at gmail dot com>
-
 pkgname=wt-rpm
 pkgver=20140803
 pkgrel=5
 pkgdesc="Remote Power Managemant"
-arch=('armv6h')
+arch=("armv6h")
 url="https://gitorious.org/wt-rpm"
-license=('GPL')
-depends=('wt' 'wiringpi' 'boost-libs')
-makedepends=('wt' 'wiringpi' 'boost' 'gcc' 'cmake')
-optdepends=('nginx: authentication  support')
-
+license=("GPL")
+depends=("wt" "wiringpi" "boost-libs")
+makedepends=("wt" "wiringpi" "boost" "gcc" "cmake")
+optdepends=("nginx: authentication  support")
 source=(http://forumi0721.ipdisk.co.kr:8000/distfiles/${pkgname}-${pkgver}.tar.gz
 	http://forumi0721.ipdisk.co.kr:8000/distfiles/wt-rpm.json)
-
-md5sums=('bd30e35b691f266f3857b7f465c862a7'
-	'09e4a659cf1dbf63dec1d052e50e40a8')
+md5sums=("bd30e35b691f266f3857b7f465c862a7"
+	"09e4a659cf1dbf63dec1d052e50e40a8")
 
 build() {
 	cd ${srcdir}/${pkgname}
@@ -36,7 +30,6 @@ package() {
 	install -d ${pkgdir}/usr/share/wtrpm
 	install -m644 green_light.png ${pkgdir}/usr/share/wtrpm/
 	install -m644 off_light.png ${pkgdir}/usr/share/wtrpm/
-	#install -m644 ping.png ${pkgdir}/usr/share/wtrpm/
 	install -m644 power-button.png ${pkgdir}/usr/share/wtrpm/
 
 	cd ${srcdir}/${pkgname}

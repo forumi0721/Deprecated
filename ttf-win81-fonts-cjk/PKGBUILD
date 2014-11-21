@@ -1,0 +1,20 @@
+pkgname=ttf-win81-fonts-cjk
+pkgver=0.1
+pkgrel=1
+pkgdesc="Windows 8.1 korean fonts"
+arch=("any")
+license=("custom")
+url="http://www.microsoft.com"
+depends=("fontconfig" "xorg-fonts-encodings" "xorg-font-utils")
+conflicts=("ttf-win71-fonts-cjk" "ttf-win71-fonts")
+provides=("ttf-font")
+install=win81-fonts-cjk.install
+source=("http://forumi0721.iptime.org:8000/distfiles/${pkgname}-${pkgver}.tar.gz")
+md5sums=("3936177f552bc44fe4c676e45c9843b9")
+
+package() {
+	cd ${srcdir}/${pkgname}-${pkgver}
+	install -d ${pkgdir}/usr/share/fonts/TTF
+	install -m644 *.ttf ${pkgdir}/usr/share/fonts/TTF/
+	install -m644 *.ttc ${pkgdir}/usr/share/fonts/TTF/
+}
