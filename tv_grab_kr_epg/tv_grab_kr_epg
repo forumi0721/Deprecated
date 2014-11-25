@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ "x$1" = "x" ]; then
+	#wget -qN -P /harddisk/UTIL http://test4.me/mc/xmltv.xml
+	#cat /harddisk/UTIL/xmltv.xml
+	curl -s -f http://test4.me/mc/xmltv.xml
+	exit 0
+fi
+
+case "$1" in
+	--description)
+	echo "EPG grabber"
+	;;
+
+	--version)
+	echo "1.0"
+	;;
+
+	--capabilities)
+	echo "baseline"
+	;;
+esac

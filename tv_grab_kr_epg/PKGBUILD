@@ -1,0 +1,17 @@
+pkgname=tv_grab_kr_epg
+pkgver=0.1
+pkgrel=1
+pkgdesc="EPG grabber for Korea"
+arch=("any")
+url="localhost"
+license=("GPL")
+depends=("tvheadend")
+source=(tv_grab_kr_epg)
+md5sums=("e29efdc4a89c9814406fc940a6fb0bec")
+
+package() {
+	cd ${srcdir}
+	pwd
+	install -d ${pkgdir}/usr/bin
+	install -m755 tv_grab_kr_epg ${pkgdir}/usr/bin/
+}
