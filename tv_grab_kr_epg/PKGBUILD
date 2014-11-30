@@ -7,7 +7,7 @@ url="localhost"
 license=("GPL")
 depends=("tvheadend")
 source=(tv_grab_kr_epg)
-md5sums=("e29efdc4a89c9814406fc940a6fb0bec")
+md5sums=("09c3fc1358f2a982a25b6a2b1466605e")
 
 package() {
 	cd ${srcdir}
