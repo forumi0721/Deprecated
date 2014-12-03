@@ -1,0 +1,20 @@
+pkgname=pogoplug
+pkgver=3.4.5.1
+pkgrel=1
+pkgdesc="my.pogoplug.com service daemon"
+arch=("armv6h" "arm")
+url="my.pogoplug.com"
+license=("Other")
+install="pogoplug.install"
+source=(${pkgname}-${pkgver}-${pkgrel}-arm.bin.tar.xz::https://dl.dropboxusercontent.com/u/15043728/ArchLinuxArm/my.pogoplug.com/${pkgname}-${pkgver}-${pkgrel}-arm.pkg.tar.xz)
+md5sums=("SKIP")
+
+package() {
+	cd ${srcdir}/usr/local
+	install -d ${pkgdir}/usr/local
+	cp -rp ${srcdir}/usr/local/cloudengines ${pkgdir}/usr/local/
+
+	cd ${srcdir}/usr/lib/systemd/system
+	install -d ${pkgdir}/usr/lib/systemd/system
+	install pogoplug.service ${pkgdir}/usr/lib/systemd/system/
+}
