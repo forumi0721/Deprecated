@@ -5,7 +5,6 @@ pkgdesc="EPG grabber for Korea"
 arch=("any")
 url="localhost"
 license=("GPL")
-depends=("tvheadend")
 source=(tv_grab_kr_epg)
 md5sums=("09c3fc1358f2a982a25b6a2b1466605e")
 
