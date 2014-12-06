@@ -5,6 +5,7 @@ pkgdesc="my.pogoplug.com service daemon"
 arch=("armv6h" "arm")
 url="my.pogoplug.com"
 license=("Other")
+depends=("net-tools")
 install="pogoplug.install"
 source=(${pkgname}-${pkgver}-${pkgrel}-arm.bin.tar.xz::https://dl.dropboxusercontent.com/u/15043728/ArchLinuxArm/my.pogoplug.com/${pkgname}-${pkgver}-${pkgrel}-arm.pkg.tar.xz)
 md5sums=("SKIP")
