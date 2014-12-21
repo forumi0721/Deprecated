@@ -1,0 +1,79 @@
+# Maintainer: toha257 <toha257@gmail.com>
+
+pkgname=arm-linux-gnueabihf-debian
+pkgver=4.7.2_5
+pkgrel=1
+pkgdesc="GNU C compiler (arm-linux-gnueabihf)"
+arch=('x86_64')
+url="http://www.emdebian.org/"
+license=('GPL2')
+depends=('cloog' 'glibc' 'libmpc' 'zlib')
+provides=('arm-linux-gnueabihf-debian')
+conflicts=('arm-linux-gnueabihf-binutils' 'arm-linux-gnueabihf-eglibc' 'arm-linux-gnueabihf-eglibc-headers' 'arm-linux-gnueabihf-gcc' 'arm-linux-gnueabihf-gcc-stage1' 'arm-linux-gnueabihf-gcc-stage2' 'arm-linux-gnueabihf-glibc' 'arm-linux-gnueabihf-glibc-headers' 'arm-linux-gnueabihf-linux-api-headers' 'arm-linux-gnueabihf-raspi' 'binutils-arm-linux-gnueabihf-bin' 'cpp-4.8-arm-linux-gnueabihf-bin' 'cpp-arm-linux-gnueabihf-bin' 'g++-arm-linux-gnueabihf-bin' 'gcc-4.8-arm-linux-gnueabihf-bin' 'gcc-arm-linux-gnueabihf-bin' 'ncurses-arm-linux-gnueabihf')
+options=('!strip' '!buildflags' 'staticlibs')
+source=("http://www.emdebian.org/debian/pool/main/g/gcc-4.7/libstdc++6-armhf-cross_4.7.2-5_all.deb"
+	"http://www.emdebian.org/debian/pool/main/e/eglibc/libc6-dev-armhf-cross_2.13-38_all.deb"
+	"http://www.emdebian.org/debian/pool/main/g/gcc-4.7/libgcc1-armhf-cross_4.7.2-5_all.deb"
+	"http://www.emdebian.org/debian/pool/main/g/gcc-4.7/libgomp1-armhf-cross_4.7.2-5_all.deb"
+	"http://www.emdebian.org/debian/pool/main/g/gcc-4.7/libstdc++6-4.7-dev-armhf-cross_4.7.2-5_all.deb"
+	"http://www.emdebian.org/debian/pool/main/e/eglibc/libc-dev-bin-armhf-cross_2.13-38_all.deb"
+	"http://www.emdebian.org/debian/pool/main/g/gcc-4.7/gcc-4.7-arm-linux-gnueabihf-base_4.7.2-5_amd64.deb"
+	"http://www.emdebian.org/debian/pool/main/b/binutils/binutils-arm-linux-gnueabihf_2.22-7.1_amd64.deb"
+	"http://www.emdebian.org/debian/pool/main/e/eglibc/libc-bin-armhf-cross_2.13-38_all.deb"
+	"http://www.emdebian.org/debian/pool/main/g/gcc-4.7/g++-4.7-arm-linux-gnueabihf_4.7.2-5_amd64.deb"
+	"http://www.emdebian.org/debian/pool/main/g/gcc-4.7/gcc-4.7-arm-linux-gnueabihf_4.7.2-5_amd64.deb"
+	"http://www.emdebian.org/debian/pool/main/g/gcc-4.7/cpp-4.7-arm-linux-gnueabihf_4.7.2-5_amd64.deb"
+	"http://www.emdebian.org/debian/pool/main/e/eglibc/libc6-armhf-cross_2.13-38_all.deb"
+	"http://www.emdebian.org/debian/pool/main/l/linux/linux-libc-dev-armhf-cross_3.2.35-2_all.deb")
+md5sums=('d3a81e6d2c9dee2baefb64eb9acbb283'
+	'fcdb8464f6a84045544b37ca892e040d'
+	'7b3eb2ad6b213819ff3356bbdecbf541'
+	'1827d33259b01abdfb314d847855a864'
+	'65ec55257814ef5e9af980cb6a621c3b'
+	'b4c4012d12e993b178cdbba66928ce65'
+	'0bfec0fb7d67c3659fbe837465271ec8'
+	'bd577e6594cbb57c7806858a6183e9f6'
+	'118714914a1e537c833fe49e16757606'
+	'2e1767070cda32a43ffe0aa25da785bb'
+	'9e284b9a21d2c6fce0e18a8b304813b9'
+	'874e69ec8ea990b693f347fcce2b0499'
+	'e727daf30009fca7ead2e67fe2625699'
+	'97f5a7b6be35063cf524ce1b511d0c0c')
+noextract=("libstdc++6-armhf-cross_4.7.2-5_all.deb"
+	"libc6-dev-armhf-cross_2.13-38_all.deb"
+	"libgcc1-armhf-cross_4.7.2-5_all.deb"
+	"libgomp1-armhf-cross_4.7.2-5_all.deb"
+	"libstdc++6-4.7-dev-armhf-cross_4.7.2-5_all.deb"
+	"libc-dev-bin-armhf-cross_2.13-38_all.deb"
+	"gcc-4.7-arm-linux-gnueabihf-base_4.7.2-5_amd64.deb"
+	"binutils-arm-linux-gnueabihf_2.22-7.1_amd64.deb"
+	"libc-bin-armhf-cross_2.13-38_all.deb"
+	"g++-4.7-arm-linux-gnueabihf_4.7.2-5_amd64.deb"
+	"gcc-4.7-arm-linux-gnueabihf_4.7.2-5_amd64.deb"
+	"cpp-4.7-arm-linux-gnueabihf_4.7.2-5_amd64.deb"
+	"libc6-armhf-cross_2.13-38_all.deb"
+	"linux-libc-dev-armhf-cross_3.2.35-2_all.deb")
+
+package() {
+	cd $pkgdir
+	for source in "${noextract[@]}"; do
+		rm -rf $pkgdir/debian-binary $pkgdir/control.tar.gz $pkgdir/data.tar.gz
+		ar x $srcdir/$source
+		tar xf $pkgdir/data.tar.gz
+		rm -rf $pkgdir/debian-binary $pkgdir/control.tar.gz $pkgdir/data.tar.gz
+	done
+
+	cd $pkgdir/usr/bin
+	ln -s arm-linux-gnueabihf-gcc-ar-4.7 arm-linux-gnueabihf-gcc-ar
+	ln -s arm-linux-gnueabihf-gcc-nm-4.7 arm-linux-gnueabihf-gcc-nm
+	ln -s arm-linux-gnueabihf-gcc-ranlib-4.7 arm-linux-gnueabihf-gcc-ranlib
+	ln -s arm-linux-gnueabihf-gcov-4.7 arm-linux-gnueabihf-gcov
+	ln -s arm-linux-gnueabihf-cpp-4.7 arm-linux-gnueabihf-cpp
+	ln -s arm-linux-gnueabihf-g++-4.7 arm-linux-gnueabihf-g++
+	ln -s arm-linux-gnueabihf-gcc-4.7 arm-linux-gnueabihf-gcc
+
+	cd $pkgdir/usr/lib
+	ln -s libmpc.so.3.0.0 libmpc.so.2
+	ln -s libcloog-isl.so.4.0.0 libcloog-debian.so.0
+}
+
