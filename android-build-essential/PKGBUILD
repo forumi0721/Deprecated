@@ -1,0 +1,21 @@
+# Maintainer: toha257 <toha257@gmail.com>
+
+pkgname=android-build-essential
+pkgver=0.1
+pkgrel=1
+pkgdesc="Android Build Essential"
+arch=("x86" 'x86_64')
+url="http://www.android.com/"
+license=('GPL2')
+if [ "${arch}" = "x86" ]; then
+	depends=("gcc" "git" "gnupg" "flex" "bison" "gperf" "sdl" "wxgtk" "squashfs-tools" "curl" "ncurses" "zlib" "schedtool" "perl-switch" "zip" "unzip" "libxslt" "python2-virtualenv" "bc")
+else
+	depends=("gcc" "git" "gnupg" "flex" "bison" "gperf" "sdl" "wxgtk" "squashfs-tools" "curl" "ncurses" "zlib" "schedtool" "perl-switch" "zip" "unzip" "libxslt" "python2-virtualenv" "bc" "gcc-multilib" "lib32-zlib" "lib32-ncurses" "lib32-readline" "jdk7-openjdk")
+fi
+options=('!strip' '!buildflags' 'staticlibs')
+
+package()
+{
+	cd "${srcdir}"
+}
+
