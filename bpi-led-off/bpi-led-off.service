@@ -1,0 +1,11 @@
+[Unit]
+Description=Banana Pi green LED off service
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/bpi-led-off
+ExecStop=/usr/bin/bpi-led-on
