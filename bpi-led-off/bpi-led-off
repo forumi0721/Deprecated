@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo none > /sys/devices/platform/leds-sunxi/leds/green:ph24:led1/trigger
