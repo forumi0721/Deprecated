@@ -1,0 +1,33 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("libump")
+pkgver=0.1
+pkgrel=1
+pkgdesc="Unified Memory Provider userspace API source code needed for xf86-video-mali compilation"
+arch=("armv7h")
+url="https://github.com/LeMaker/libump/"
+license=("GPL")
+source=("libump::git+https://github.com/LeMaker/libump.git")
+md5sums=("SKIP")
+
+pkgver() {
+  cd "${pkgname}"
+  git describe --long | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd "${pkgname}"
+  autoreconf -i
+}
+
+build() {
+	cd "${pkgname}"
+	make
+}
+
+package() {
+  cd "${pkgname}"
+  make DESTDIR="${pkgdir}" install
+}
+
+# vim:set ts=2 sw=2 et:
