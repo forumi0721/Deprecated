@@ -1,10 +1,11 @@
-pkgname=autostart
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("autostart")
 pkgver=0.1
 pkgrel=1
 pkgdesc="Autostart script service"
 arch=("any")
-url="http://forumi0721.iptime.org"
-license=("Other")
+license=("LGPL")
 depends=("sh" "findutils")
 source=("autostart.service"
 	"autostart.sh")
@@ -14,11 +15,13 @@ md5sums=("SKIP"
 package() {
 	cd "${srcdir}"
 
-	install -dm755 "${pkgdir}"/usr/lib/systemd/system
-	install -Dm644 "${srcdir}"/autostart.service "${pkgdir}"/usr/lib/systemd/system/
+	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+	install -Dm0644 "${srcdir}"/autostart.service "${pkgdir}"/usr/lib/systemd/system/
 
-	install -dm755 "${pkgdir}"/usr/bin
-	install -Dm755 "${srcdir}"/autostart.sh "${pkgdir}"/usr/bin/
+	install -dm0755 "${pkgdir}"/usr/bin
+	install -Dm0755 "${srcdir}"/autostart.sh "${pkgdir}"/usr/bin/
 
-	install -dm755 "${pkgdir}"/etc/autostart.d
+	install -dm0755 "${pkgdir}"/etc/autostart.d
 }
+
+# vim:set ts=2 sw=2 et:

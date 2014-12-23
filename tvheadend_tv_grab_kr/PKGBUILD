@@ -1,0 +1,20 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("tvheadend_tv_grab_kr")
+pkgver=0.1
+pkgrel=1
+pkgdesc="EPG grabber for Korea"
+arch=("any")
+url="https://tvheadend.org/"
+license=("custom")
+depends=("tvheadend")
+source=(tv_grab_kr_epg)
+md5sums=("09c3fc1358f2a982a25b6a2b1466605e")
+
+package() {
+	cd "${pkgdir}"
+	install -dm0755 "${pkgdir}"/usr/bin
+	install -Dm0755 "${srcdir}"/tv_grab_kr_epg "${pkgdir}"/usr/bin/
+}
+
+# vim:set ts=2 sw=2 et:

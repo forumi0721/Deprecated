@@ -1,49 +1,48 @@
-# Maintainer: Mike Brown <mbrown@archlinuxarm.org>
-# Maintainer: Kevin Mihelich <kevin@archlinuxarm.org>
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
-buildarch=18
-
-_pkgname='WiringBP'
-pkgname=wiringbp-git
+pkgname=("wiringbp-git")
 pkgver=20141222
 pkgrel=1
 pkgdesc="WiringBP: An implementation of most of the Arduino Wiring functions for the Banana Pi"
-arch=('armv7h')
-makedepends=('git')
-license=('LGPL')
+arch=("armv7h")
 url="https://github.com/LeMaker/WiringBP/"
-provides=('wiringpi') 
-conflicts=('wiringpi')
-source=("git+https://github.com/LeMaker/WiringBP")
-md5sums=('SKIP')
+license=("LGPL")
+makedepends=("git")
+provides=("wiringpi") 
+conflicts=("wiringpi")
+source=("${pkgname}::git+https://github.com/LeMaker/WiringBP")
+md5sums=("SKIP")
 
 prepare() {
-  cd "${_pkgname}"
-  sed -i 's|/usr/local/bin/gpio|/usr/bin/gpio|' wiringPi/wiringPi.c
+	cd "${pkgname}"
+	sed -i "s|/usr/local/bin/gpio|/usr/bin/gpio|" wiringPi/wiringPi.c
 }
 
 build() {
-  cd "${_pkgname}"
-
-  make -C wiringPi all static
-  make -C devLib all static INCLUDE+="-I${srcdir}/${_pkgname}/wiringPi" LDFLAGS+="-L${srcdir}/${_pkgname}/wiringPi"
-  make -C gpio INCLUDE+="-I${srcdir}/${_pkgname}/wiringPi -I${srcdir}/${_pkgname}/devLib" LDFLAGS+="-L${srcdir}/${_pkgname}/wiringPi -L${srcdir}/${_pkgname}/devLib"
+	cd "${pkgname}"
+	make -C wiringPi all static
+	make -C devLib all static INCLUDE+="-I${srcdir}/${pkgname}/wiringPi" LDFLAGS+="-L${srcdir}/${pkgname}/wiringPi"
+	make -C gpio INCLUDE+="-I${srcdir}/${pkgname}/wiringPi -I${srcdir}/${pkgname}/devLib" LDFLAGS+="-L${srcdir}/${pkgname}/wiringPi -L${srcdir}/${pkgname}/devLib"
 }
 
 package(){
-  cd "${srcdir}/${_pkgname}/wiringPi"
-  install -m 0755 -d "${pkgdir}/usr/lib"
-  install -m 0755 -d "${pkgdir}/usr/include"
-  install -m 0644 *.h "${pkgdir}/usr/include"
-  install -m 0644 libwiringPi.{a,so*} "${pkgdir}/usr/lib"
-
-  cd "${srcdir}/${_pkgname}/devLib"
-  install -m 0644 *.h "${pkgdir}/usr/include"
-  install -m 0644 libwiringPiDev.{a,so*} "${pkgdir}/usr/lib"
-
-  cd "${srcdir}/${_pkgname}/gpio"
-  install -m 0755 -d "${pkgdir}/usr/bin"
-  install -m 4755 gpio "${pkgdir}/usr/bin"
-  mkdir -p "${pkgdir}/usr/share/man/man1"
-  install -m 0644 gpio.1 "${pkgdir}/usr/share/man/man1/"
+	cd "${srcdir}"/"${pkgname}"/wiringPi
+	install -dm0755 "${pkgdir}"/usr/include
+	install -Dm0644 *.h "${pkgdir}"/usr/include/
+	install -dm0755 "${pkgdir}"/usr/lib
+	install -Dm0644 libwiringPi.{a,so*} "${pkgdir}"/usr/lib/
+	
+	cd "${srcdir}"/"${pkgname}"/devLib
+	install -dm0755 "${pkgdir}"/usr/include
+	install -Dm0644 *.h "${pkgdir}"/usr/include/
+	install -dm0755 "${pkgdir}"/usr/lib
+	install -Dm0644 libwiringPiDev.{a,so*} "${pkgdir}"/usr/lib
+	
+	cd "${srcdir}"/"${pkgname}"/gpio
+	install -dm0755 "${pkgdir}"/usr/bin
+	install -Dm4755 gpio "${pkgdir}"/usr/bin/
+	install -dm0755 "${pkgdir}"/usr/share/man/man1
+	install -Dm0644 gpio.1 "${pkgdir}"/usr/share/man/man1/
 }
+
+# vim:set ts=2 sw=2 et:

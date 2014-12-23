@@ -1,25 +1,29 @@
-pkgname=vlmcsd
-pkgver=20141003
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("vlmcsd")
+pkgver=20141219
 pkgrel=1
 pkgdesc="KMS emulator."
-arch=("arm" "armv6h i686" "x86_64")
+arch=("arm" "armv6h" "armv7h" "i686" "x86_64")
 url="http://forums.mydigitallife.info/threads/50234-Emulated-KMS-Servers-on-non-Windows-platforms/"
 license=("GPL")
-source=(http://forumi0721.ipdisk.co.kr:8000/distfiles/vlmcsd-$pkgver.tar.gz
-	vlmcsd.service)
-md5sums=("dd56d8ff8bff49bdc232fd7653245609"
+source=("${pkgname}-${pkgver}.zip"
+	"${pkgname}.service")
+md5sums=("12406fe6b054406035afad63a16f9d22"
 	"197306c5f3bc511fce5f7b30f747a3f6")
 
 build() {
-	cd ${srcdir}/${pkgname}-${pkgver}
+	cd "${srcdir}"/"${pkgname}"-"${pkgver}"
 	make
 }
 
 package() {
-	cd ${srcdir}/${pkgname}-${pkgver}
-	install -d ${pkgdir}/usr/bin
-	install -m755 vlmcsd ${pkgdir}/usr/bin/
-	install -m755 vlmcs ${pkgdir}/usr/bin/
-	install -d ${pkgdir}/usr/lib/systemd/system
-	install -m644 ../../vlmcsd.service ${pkgdir}/usr/lib/systemd/system
+	cd "${srcdir}"/"${pkgname}"-"${pkgver}"
+	install -dm0755 "${pkgdir}"/usr/bin
+	install -Dm0755 vlmcsd "${pkgdir}"/usr/bin/
+	install -Dm0755 vlmcs "${pkgdir}"/usr/bin/
+	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+	install -Dm0644 "${srcdir}"/vlmcsd.service "${pkgdir}"/usr/lib/systemd/system/
 }
+
+# vim:set ts=2 sw=2 et:

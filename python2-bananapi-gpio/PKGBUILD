@@ -1,20 +1,27 @@
-# Maintainer: Michael Serpieri contact at pygoscelis dot org
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=python2-bananapi-gpio
 pkgver=0.5.5
 pkgrel=1
 pkgdesc="Python library for GPIO access on a Banana Pi"
-arch=('any')
-url="http://sourceforge.net/projects/raspberry-gpio-python/"
-license=('MIT')
-depends=('python2')
-makedepends=('python2-distribute')
-provides=('python2-raspberry-gpio') 
-replace=('raspberry-gpio-python')
-conflicts=('raspberry-gpio-python' 'python2-raspberry-gpio')
-source=(git+https://github.com/LeMaker/RPi.GPIO_BP.git)
-md5sums=('SKIP')
+arch=("any")
+url="https://github.com/LeMaker/RPi.GPIO_BP/"
+license=("MIT")
+depends=("python2")
+makedepends=("python2-setuptools")
+provides=("python2-raspberry-gpio") 
+replace=("raspberry-gpio-python")
+conflicts=("raspberry-gpio-python" "python2-raspberry-gpio")
+source=("git+https://github.com/LeMaker/RPi.GPIO_BP.git")
+md5sums=("SKIP")
+
 build() {
-	cd $srcdir/RPi.GPIO_BP
-	python2 setup.py install --prefix=/usr --root="$pkgdir/" --optimize=1
+	cd "${srcdir}"/RPi.GPIO_BP
+	python2 setup.py install --prefix=/usr --root="${pkgdir}"/ --optimize=1
 }
+
+package() {
+	cd "${pkgdir}"
+}
+
+# vim:set ts=2 sw=2 et:

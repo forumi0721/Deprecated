@@ -1,18 +1,22 @@
-pkgname=ttf-bitstream-vera-sans-mono
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("ttf-bitstream-vera-sans-mono")
 pkgver=0.1
 pkgrel=1
 pkgdesc="Bitstream vera sans mono font"
 arch=("any")
-license=("custom")
 url="http://www-old.gnome.org/fonts/"
+license=("custom")
 depends=("fontconfig" "xorg-fonts-encodings" "xorg-font-utils")
 provides=("ttf-font")
-install=vera.install
-source=("http://forumi0721.iptime.org:8000/distfiles/${pkgname}-${pkgver}.tar.bz2")
-md5sums=("901122a7aa99a7d25f4b78d762e5115e")
+install="${pkgname}.install"
+source=("${pkgname}.zip")
+md5sums=("1060cc1a5ef58d279d6d9413f7214dad")
 
 package() {
-	cd ${srcdir}/${pkgname}-${pkgver}
-	install -d ${pkgdir}/usr/share/fonts/TTF
-	install -m644 *.ttf ${pkgdir}/usr/share/fonts/TTF/
+	cd "${pkgdir}"
+	install -dm0755 "${pkgdir}"/usr/share/fonts/TTF
+	install -Dm0644 "${srcdir}"/BitstreamVeraSansMono.ttf "${pkgdir}"/usr/share/fonts/TTF/
 }
+
+# vim:set ts=2 sw=2 et:

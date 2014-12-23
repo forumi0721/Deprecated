@@ -1,19 +1,23 @@
-pkgname=ttf-nanum-fonts
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("ttf-nanum-fonts")
 pkgver=0.1
 pkgrel=1
 pkgdesc="Nanum fonts"
 arch=("any")
-license=("custom")
 url="http://hangul.naver.com"
+license=("OFL")
 depends=("fontconfig" "xorg-fonts-encodings" "xorg-font-utils")
-conflicts=("ttf-nanum")
+conflicts=("ttf-nanum" "ttf-nanumgothic_coding")
 provides=("ttf-font")
-install=nanum-fonts.install
-source=("http://forumi0721.iptime.org:8000/distfiles/${pkgname}-${pkgver}.tar.gz")
-md5sums=("fcd794ef654520368ca611f90d0a43e4")
+install="${pkgname}.install"
+source=("${pkgname}.zip")
+md5sums=("dd0bda05fe1cda28acdbb9941f40ead9")
 
 package() {
-	cd ${srcdir}/${pkgname}-${pkgver}
-	install -d ${pkgdir}/usr/share/fonts/TTF
-	install -m644 *.ttf ${pkgdir}/usr/share/fonts/TTF/
+	cd "${pkgdir}"
+	install -dm0755 "${pkgdir}"/usr/share/fonts/TTF
+	install -Dm0644 "${srcdir}"/*.ttf "${pkgdir}"/usr/share/fonts/TTF/
 }
+
+# vim:set ts=2 sw=2 et:
