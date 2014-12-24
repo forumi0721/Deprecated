@@ -1,5 +1,7 @@
 [Unit]
 Description=Autostart custom script
+After=local-fs.target
+After=network.target
 
 [Install]
 WantedBy=multi-user.target

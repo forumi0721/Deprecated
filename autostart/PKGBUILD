@@ -7,6 +7,7 @@ pkgdesc="Autostart script service"
 arch=("any")
 license=("LGPL")
 depends=("sh" "findutils")
+install="${pkgname}.install"
 source=("autostart.service"
 	"autostart.sh")
 md5sums=("SKIP"
