@@ -19,6 +19,7 @@ depends=(
 "mc"
 "net-tools"
 "pkgfile"
+"screen"
 "unzip"
 "vim"
 "wget"
