@@ -14,6 +14,7 @@ depends=(
 "btrfs-progs"
 "cpio"
 "dosfstools"
+"ethtool"
 "f2fs-tools"
 "gptfdisk"
 "mc"
@@ -25,6 +26,10 @@ depends=(
 "vim"
 "wget"
 "zip"
+)
+optdepends=(
+"samba:     SMB Fileserver and AD Domain serve"
+"nfs-utils: Support programs for Network File Systems"
 )
 
 package() {
