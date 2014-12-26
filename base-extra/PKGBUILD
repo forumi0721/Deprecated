@@ -18,6 +18,7 @@ depends=(
 "gptfdisk"
 "mc"
 "net-tools"
+"openssh"
 "pkgfile"
 "screen"
 "unzip"
