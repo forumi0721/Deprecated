@@ -1,0 +1,20 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("base-devel-extra")
+pkgver=0.1
+pkgrel=1
+pkgdesc="Dummy for base-devel"
+arch=("x86_64" "x86")
+url="http://localhost/"
+license=("Other")
+if [ "${arch}" = "x86_64" ]; then
+	depends=("android-tools" "android-udev" "gcc" "git" "gnupg" "flex" "bison" "gperf" "sdl" "wxgtk" "squashfs-tools" "curl" "ncurses" "zlib" "schedtool" "perl-switch" "zip" "unzip" "libxslt" "python2-virtualenv" "bc" "gcc-multilib" "lib32-zlib" "lib32-ncurses" "lib32-readline" "jdk7-openjdk" "jdk8-openjdk" "ccache" "gdb" "ctags" "cscope" "git" "subversion" "linux-headers" "uboot-tools" "libusb" "fakeroot" "wget" "zlib" "lib32-zlib" "ncurses" "lib32-ncurses")
+else
+	depends=("android-tools" "android-udev" "gcc" "git" "gnupg" "flex" "bison" "gperf" "sdl" "wxgtk" "squashfs-tools" "curl" "ncurses" "zlib" "schedtool" "perl-switch" "zip" "unzip" "libxslt" "python2-virtualenv" "bc" "jdk7-openjdk" "jdk8-openjdk" "ccache" "gdb" "cscope" "git" "subversion" "linux-headers" "uboot-tools" "libusb" "fakeroot" "wget" "zlib" "ncurses")
+fi
+
+package() {
+	cd "${srcdir}"
+}
+
+# vim:set ts=2 sw=2 et:
