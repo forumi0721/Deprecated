@@ -4,30 +4,26 @@ pkgname=("base-extra")
 pkgver=0.1
 pkgrel=1
 pkgdesc="Dummy for Extra Package"
-arch=("x86_64" "x86" "arm" "armv6h" "armv7h")
+arch=("any")
 url="http://localhost/"
 license=("Other")
 depends=(
-  "abs"
-  "arch-install-scripts"
-  "bash-completion"
-  "btrfs-progs"
-  "cpio"
-  "dosfstools"
-  "f2fs-tools"
-  "mc"
-  "net-tools"
-  "pkgfile"
-  "unzip"
-  "vim"
-  "wget"
-  "zip"
+"abs"
+"arch-install-scripts"
+"bash-completion"
+"btrfs-progs"
+"cpio"
+"dosfstools"
+"f2fs-tools"
+"gptfdisk"
+"mc"
+"net-tools"
+"pkgfile"
+"unzip"
+"vim"
+"wget"
+"zip"
 )
-if [ "${CARCH}" = "x86_64" ] || [ "${CARCH}" = "x86" ]; then
-  depends+=(
-    "gptdisk"
-  )
-fi
 
 package() {
   cd "${pkgdir}"
