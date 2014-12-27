@@ -28,10 +28,11 @@ depends=(
 "zip"
 )
 optdepends=(
-"git:        the fast distributed version control system"
-"subversion: A Modern Concurrent Version Control System"
-"samba:      SMB Fileserver and AD Domain serve"
-"nfs-utils:  Support programs for Network File Systems"
+"linux-headers: Header files and scripts for building modules for Linux kernel"
+"git:           the fast distributed version control system"
+"subversion:    A Modern Concurrent Version Control System"
+"samba:         SMB Fileserver and AD Domain serve"
+"nfs-utils:     Support programs for Network File Systems"
 )
 
 package() {
