@@ -3,7 +3,7 @@
 pkgname=("base-extra")
 pkgver=0.1
 pkgrel=1
-pkgdesc="Dummy for Extra Package"
+pkgdesc="Install extra packages"
 arch=("any")
 url="http://localhost/"
 license=("Other")
@@ -16,6 +16,7 @@ depends=(
 "dosfstools"
 "ethtool"
 "f2fs-tools"
+"git"
 "gptfdisk"
 "mc"
 "net-tools"
@@ -26,13 +27,6 @@ depends=(
 "vim"
 "wget"
 "zip"
-)
-optdepends=(
-"linux-headers: Header files and scripts for building modules for Linux kernel"
-"git:           the fast distributed version control system"
-"subversion:    A Modern Concurrent Version Control System"
-"samba:         SMB Fileserver and AD Domain serve"
-"nfs-utils:     Support programs for Network File Systems"
 )
 
 package() {
