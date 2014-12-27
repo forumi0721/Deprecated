@@ -15,14 +15,17 @@ md5sums=("12406fe6b054406035afad63a16f9d22"
 
 build() {
 	cd "${srcdir}"/"${pkgname}"-"${pkgver}"
+
 	make
 }
 
 package() {
-	cd "${srcdir}"/"${pkgname}"-"${pkgver}"
+	cd "${pkgdir}"
+
 	install -dm0755 "${pkgdir}"/usr/bin
-	install -Dm0755 vlmcsd "${pkgdir}"/usr/bin/
-	install -Dm0755 vlmcs "${pkgdir}"/usr/bin/
+	install -Dm0755 "${srcdir}"/"${pkgname}"-"${pkgver}"/vlmcsd "${pkgdir}"/usr/bin/
+	install -Dm0755 "${srcdir}"/"${pkgname}"-"${pkgver}"/vlmcs "${pkgdir}"/usr/bin/
+
 	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
 	install -Dm0644 "${srcdir}"/vlmcsd.service "${pkgdir}"/usr/lib/systemd/system/
 }

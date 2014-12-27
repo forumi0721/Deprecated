@@ -14,13 +14,13 @@ source=("${pkgname}-${pkgver}-${pkgrel}-arm.bin.tar.xz::https://dl.dropboxuserco
 md5sums=("SKIP")
 
 package() {
-	cd "${srcdir}"/usr/local
+	cd "${pkgdir}"
+
 	install -dm0755 "${pkgdir}"/usr/local
 	cp -rp "${srcdir}"/usr/local/cloudengines "${pkgdir}"/usr/local/
 
-	cd "${srcdir}"/usr/lib/systemd/system
 	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
-	install -Dm0644 pogoplug.service "${pkgdir}"/usr/lib/systemd/system/
+	install -Dm0644 "${srcdir}"/usr/lib/systemd/system/pogoplug.service "${pkgdir}"/usr/lib/systemd/system/
 }
 
 # vim:set ts=2 sw=2 et:

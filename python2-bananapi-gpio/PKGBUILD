@@ -17,6 +17,7 @@ md5sums=("SKIP")
 
 build() {
 	cd "${srcdir}"/RPi.GPIO_BP
+
 	python2 setup.py install --prefix=/usr --root="${pkgdir}"/ --optimize=1
 }
 

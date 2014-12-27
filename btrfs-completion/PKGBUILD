@@ -12,6 +12,7 @@ md5sums=("74a506cb86f32a508e1df5a4598e416b")
 
 package() {
 	cd "${pkgdir}"
+
 	install -dm0755 "${pkgdir}"/usr/share/bash-completion/completions/
 	install -Dm0644 "${srcdir}"/btrfs "${pkgdir}"/usr/share/bash-completion/completions/
 }

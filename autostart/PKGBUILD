@@ -14,7 +14,7 @@ md5sums=("SKIP"
 	"SKIP")
 
 package() {
-	cd "${srcdir}"
+	cd "${pkgdir}"
 
 	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
 	install -Dm0644 "${srcdir}"/autostart.service "${pkgdir}"/usr/lib/systemd/system/

@@ -1,0 +1,6 @@
+post_install() {
+	echo "To use the VMware tools service, please run the following command:"
+	echo " # systemctl enable vmware-tools.service"
+	echo ""
+	echo "Please install vmware-tools in isoimage"
+}

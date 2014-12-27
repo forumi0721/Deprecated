@@ -15,6 +15,7 @@ md5sums=("1060cc1a5ef58d279d6d9413f7214dad")
 
 package() {
 	cd "${pkgdir}"
+
 	install -dm0755 "${pkgdir}"/usr/share/fonts/TTF
 	install -Dm0644 "${srcdir}"/BitstreamVeraSansMono.ttf "${pkgdir}"/usr/share/fonts/TTF/
 }

@@ -20,29 +20,29 @@ prepare() {
 
 build() {
 	cd "${pkgname}"
+
 	make -C wiringPi all static
 	make -C devLib all static INCLUDE+="-I${srcdir}/${pkgname}/wiringPi" LDFLAGS+="-L${srcdir}/${pkgname}/wiringPi"
 	make -C gpio INCLUDE+="-I${srcdir}/${pkgname}/wiringPi -I${srcdir}/${pkgname}/devLib" LDFLAGS+="-L${srcdir}/${pkgname}/wiringPi -L${srcdir}/${pkgname}/devLib"
 }
 
 package(){
-	cd "${srcdir}"/"${pkgname}"/wiringPi
+	cd "${pkgdir}"
+
 	install -dm0755 "${pkgdir}"/usr/include
-	install -Dm0644 *.h "${pkgdir}"/usr/include/
+	install -Dm0644 "${srcdir}"/"${pkgname}"/wiringPi/*.h "${pkgdir}"/usr/include/
 	install -dm0755 "${pkgdir}"/usr/lib
-	install -Dm0644 libwiringPi.{a,so*} "${pkgdir}"/usr/lib/
+	install -Dm0644 "${srcdir}"/"${pkgname}"/wiringPi/libwiringPi.{a,so*} "${pkgdir}"/usr/lib/
 	
-	cd "${srcdir}"/"${pkgname}"/devLib
 	install -dm0755 "${pkgdir}"/usr/include
-	install -Dm0644 *.h "${pkgdir}"/usr/include/
+	install -Dm0644 "${srcdir}"/"${pkgname}"/devLib/*.h "${pkgdir}"/usr/include/
 	install -dm0755 "${pkgdir}"/usr/lib
-	install -Dm0644 libwiringPiDev.{a,so*} "${pkgdir}"/usr/lib
+	install -Dm0644 "${srcdir}"/"${pkgname}"/devLib/libwiringPiDev.{a,so*} "${pkgdir}"/usr/lib
 	
-	cd "${srcdir}"/"${pkgname}"/gpio
 	install -dm0755 "${pkgdir}"/usr/bin
-	install -Dm4755 gpio "${pkgdir}"/usr/bin/
+	install -Dm4755 "${srcdir}"/"${pkgname}"/gpio/gpio "${pkgdir}"/usr/bin/
 	install -dm0755 "${pkgdir}"/usr/share/man/man1
-	install -Dm0644 gpio.1 "${pkgdir}"/usr/share/man/man1/
+	install -Dm0644 "${srcdir}"/"${pkgname}"/gpio/gpio.1 "${pkgdir}"/usr/share/man/man1/
 }
 
 # vim:set ts=2 sw=2 et:

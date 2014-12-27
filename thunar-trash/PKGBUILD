@@ -12,9 +12,10 @@ source=("Thunar")
 md5sums=("SKIP")
 
 package() {
-	cd "${srcdir}"
+	cd "${pkgdir}"
+
 	install -dm0755 "${pkgdir}"/usr/local/bin
-	install -Dm0755 Thunar "${pkgdir}"/usr/local/bin/
+	install -Dm0755 "${srcdir}"/Thunar "${pkgdir}"/usr/local/bin/
 }
 
 # vim:set ts=2 sw=2 et:

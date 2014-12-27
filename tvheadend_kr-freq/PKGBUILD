@@ -13,6 +13,7 @@ md5sums=("bc56c1d17197623eceed42b3f38e9ac5")
 
 package() {
 	cd "${pkgdir}"
+
 	install -dm0755 "${pkgdir}"/usr/share/tvheadend/data/dvb-scan/atsc
 	install -Dm0644 "${srcdir}"/kr-*-frequencies-* "${pkgdir}"/usr/share/tvheadend/data/dvb-scan/atsc/
 }

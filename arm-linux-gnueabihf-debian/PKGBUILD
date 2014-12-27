@@ -59,14 +59,16 @@ noextract=("${source[@]%%::*}")
 
 package() {
 	cd "${pkgdir}"
-	for source in "${noextract[@]}"; do
+
+	for src in "${noextract[@]}"; do
 		rm -rf "${pkgdir}"/debian-binary "${pkgdir}"/control.tar.gz "${pkgdir}"/data.tar.gz
-		ar x "${srcdir}"/$source
+		ar x "${srcdir}"/${src}
 		tar xf "${pkgdir}"/data.tar.gz
 		rm -rf "${pkgdir}"/debian-binary "${pkgdir}"/control.tar.gz "${pkgdir}"/data.tar.gz
 	done
 
 	cd "${pkgdir}"/usr/bin
+
 	ln -s arm-linux-gnueabihf-gcc-ar-4.7 arm-linux-gnueabihf-gcc-ar
 	ln -s arm-linux-gnueabihf-gcc-nm-4.7 arm-linux-gnueabihf-gcc-nm
 	ln -s arm-linux-gnueabihf-gcc-ranlib-4.7 arm-linux-gnueabihf-gcc-ranlib
@@ -76,6 +78,7 @@ package() {
 	ln -s arm-linux-gnueabihf-gcc-4.7 arm-linux-gnueabihf-gcc
 
 	cd "${pkgdir}"/usr/lib
+
 	ln -s libmpc.so.3.0.0 libmpc.so.2
 	#ln -s libcloog-isl.so.4.0.0 libcloog-debian.so.0
 }

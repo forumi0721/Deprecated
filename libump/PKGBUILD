@@ -17,6 +17,7 @@ pkgver() {
 
 prepare() {
   cd "${pkgname}"
+
   autoreconf -i
 }
 
@@ -27,6 +28,7 @@ build() {
 
 package() {
   cd "${pkgname}"
+
   make DESTDIR="${pkgdir}" install
 }
 
