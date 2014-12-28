@@ -1,0 +1,47 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("base-devel-android")
+pkgver=0.1
+pkgrel=1
+pkgdesc="Install extra packages"
+arch=("any")
+url="http://localhost/"
+license=("Other")
+depends=(
+"android-tools"
+"android-udev"
+"jdk7-openjdk"
+"git"
+"gnupg"
+"flex"
+"bison"
+"gperf"
+"sdl"
+"wxgtk"
+"squashfs-tools"
+"curl"
+"ncurses"
+"zlib"
+"schedtool"
+"perl-switch"
+"zip"
+"unzip"
+"lib32-zlib"
+"lib32-ncurses"
+"lib32-readline"
+"gcc-libs-multilib"
+"gcc-multilib"
+"lib32-gcc-libs"
+)
+optdepends=(
+"android-sdk: Google Android SDK"
+"android-ndk: Android C/C++ developer kit"
+"repo:        The Multiple Git Repository Tool from the Android Open Source Project"
+"pngcrush:    A tool for optimizing the compression of PNG files"
+)
+
+package() {
+	cd "${pkgdir}"
+}
+
+# vim:set ts=2 sw=2 et:
