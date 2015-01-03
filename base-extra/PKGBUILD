@@ -18,6 +18,7 @@ depends=(
 "ethtool"
 "f2fs-tools"
 "gptfdisk"
+"haveged"
 "mc"
 "net-tools"
 "openssh"
