@@ -17,7 +17,6 @@ depends=(
 "dosfstools"
 "ethtool"
 "f2fs-tools"
-"git"
 "gptfdisk"
 "mc"
 "net-tools"
@@ -29,6 +28,10 @@ depends=(
 "vim"
 "wget"
 "zip"
+"zsh"
+"zsh-completions"
+"zsh-lovers"
+"zsh-syntax-highlighting"
 )
 
 package() {
