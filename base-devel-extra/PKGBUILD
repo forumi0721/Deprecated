@@ -8,12 +8,14 @@ arch=("any")
 url="http://localhost/"
 license=("Other")
 depends=(
+"bashdb"
+"ccache"
+"cscope"
+"ctags"
+"gdb"
 "git"
 "subversion"
-"gdb"
-"ccache"
-"ctags"
-"cscope"
+"zshdb"
 )
 optdepends=(
 "linux-headers: Header files and scripts for building modules for Linux kernel"
