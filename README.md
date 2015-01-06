@@ -1,4 +1,4 @@
-arch_stonecold-repo
+arch_stonecold_PKGBUILDs
 ===================
 
-Arch Linux Repository
+Arch Linux PKGBUILDs Repository
