@@ -1,0 +1,45 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("wt-rpm")
+pkgver=20141223
+pkgrel=1
+pkgdesc="Remote Power Managemant"
+arch=("armv6h" "armv7h")
+url="https://gitorious.org/wt-rpm"
+license=("GPL")
+depends=("wt" "wiringpi" "boost-libs")
+makedepends=("wt" "wiringpi" "boost" "gcc" "cmake")
+optdepends=("nginx: authentication  support")
+source=("${pkgname}-${pkgver}.tar.gz"
+	"${pkgname}.json")
+md5sums=("bd30e35b691f266f3857b7f465c862a7"
+	"09e4a659cf1dbf63dec1d052e50e40a8")
+
+build() {
+	cd "${srcdir}"/"${pkgname}"
+
+	mkdir build
+	cd build
+	cmake .. -DCMAKE_INSTALL_PREFIX="${pkgdir}"/usr -DUSE_CON_HTTP=ON -DUSE_PING=OFF -USE_RASPRPM=ON -DUSE_DUMMY_RPM=ON
+	make
+}
+
+package() {
+	cd "${pkgdir}"
+
+	install -dm0755 "${pkgdir}"/usr/bin
+	make install
+
+	install -dm0755 "${pkgdir}"/usr/share/wtrpm
+	install -Dm0644 "${srcdir}"/"${pkgname}"/imgs/green_light.png "${pkgdir}"/usr/share/wtrpm/
+	install -Dm0644 "${srcdir}"/"${pkgname}"/imgs/off_light.png "${pkgdir}"/usr/share/wtrpm/
+	install -Dm0644 "${srcdir}"/"${pkgname}"/imgs/power-button.png "${pkgdir}"/usr/share/wtrpm/
+
+	install -dm0755 "${pkgdir}"/etc
+	install -Dm0644 "${srcdir}"/wt-rpm.json "${pkgdir}"/etc/
+
+	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+	install -Dm0644 "${srcdir}"/"${pkgname}"/systemd/wtrpm.service "${pkgdir}"/usr/lib/systemd/system/
+}
+
+# vim:set ts=2 sw=2 et:

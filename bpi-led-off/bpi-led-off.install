@@ -1,0 +1,18 @@
+post_install() {
+	echo "To use the bpi-led-off service, please run the following command:"
+	echo " # systemctl enable bpi-led-off.service"
+}
+
+post_upgrade() {
+	if [ -e /etc/systemd/system/multi-user.target.wants/bpi-led-off.service ]; then
+		echo "systemctl daemon-reload"
+		systemctl daemon-reload
+	fi
+}
+
+post_remove() {
+	if [ -e /etc/systemd/system/multi-user.target.wants/bpi-led-off.service ]; then
+		echo "Remove old service"
+		rm -rf /etc/systemd/system/multi-user.target.wants/bpi-led-off.service
+	fi
+}

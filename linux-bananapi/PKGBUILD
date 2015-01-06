@@ -1,0 +1,136 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+buildarch=4
+
+pkgbase="BananaPi"
+pkgname=("uboot-bananapi" "linux-bananapi" "linux-bananapi-headers")
+pkgver=20150106
+pkgrel=1
+arch=("armv7h")
+url="https://github.com/LeMaker/lemaker-bsp"
+license=("GPL")
+options=("!strip" "libtool" "staticlibs")
+source=("BananaPi_hwpack.tar.xz"
+	"BananaPi_extra.tar.xz")
+md5sums=("SKIP"
+	"SKIP")
+
+pkgver() {
+	date +'%Y%m%d'
+}
+
+package_uboot-bananapi() {
+	pkgdesc="U-Boot for ${pkgbase}"
+	backup=("boot/uEnv.txt"
+		"boot/script.bin")
+	makedepends=("sunxi-tools")
+	depends=("sunxi-tools")
+	provides=("uboot-sunxi")
+	conflicts=("uboot-sunxi")
+	install="uboot-${pkgbase,,}.install"
+	
+	cd "${pkgdir}"
+
+	# bootloader
+	install -dm755 "${pkgdir}"/boot
+	cp -r "${srcdir}"/bootloader/* "${pkgdir}"/boot/
+	find "${pkgdir}"/boot/ -type d -exec chmod 755 {} \;
+	find "${pkgdir}"/boot/ -type f -exec chmod 644 {} \;
+	#install -Dm644 "${srcdir}"/kernel/script.bin "${pkgdir}"/boot/
+	bin2fex "${srcdir}"/kernel/script.bin > "${pkgdir}"/boot/script.fex
+	sed -i -e 's/leds_trigger_1 = "heartbeat"/leds_trigger_1 = "none"/g' -e 's/fb0_framebuffer_num = 2/sunxi_fb_mem_reserve = 32\
+fb0_framebuffer_num = 3/g' "${pkgdir}"/boot/script.fex
+	fex2bin "${pkgdir}"/boot/script.fex > "${pkgdir}"/boot/script.bin
+	chmod 644 "${pkgdir}"/boot/script.bin
+	install -Dm644 "${srcdir}"/uEnv.txt "${pkgdir}"/boot/
+}
+
+package_linux-bananapi() {
+	_k_version=$(ls "${srcdir}"/rootfs/lib/modules/)
+
+	pkgdesc="The Linux Kernel and modules - ${basename}"
+	depends=("coreutils" "linux-firmware" "kmod" "mkinitcpio>=0.7")
+	optdepends=("crda: to set the correct wireless channels of your country")
+	provides=("linux-sun7i" "kernel26" "linux=${_k_version}" "aufs_friendly")
+	conflicts=("linux-sun7i" "linux-omap" "linux-imx6" "linux-armada370")
+	install="linux-${pkgbase,,}.install"
+
+	cd "${pkgdir}"
+
+	# kernel
+	install -dm755 "${pkgdir}"/boot
+	install -Dm644 "${srcdir}"/kernel/uImage "${pkgdir}"/boot/
+
+	# modules
+	install -dm755 "${pkgdir}"/usr/lib/modules
+	cp -r "${srcdir}"/rootfs/lib/modules/* "${pkgdir}"/usr/lib/modules/
+	find "${pkgdir}"/usr/lib/modules/ -type d -exec chmod 755 {} \;
+	find "${pkgdir}"/usr/lib/modules/ -type f -exec chmod 644 {} \;
+
+	# modueles - make room for external modules
+	ln -s ../extramodules-"${_k_version%.*}"-ARCH "${pkgdir}"/usr/lib/modules/"${_k_version}"/extramodules
+
+	# modules - add real version for building modules and running depmod from post_install/upgrade
+	mkdir -p "${pkgdir}"/usr/lib/modules/extramodules-"${_k_version%.*}"-ARCH
+	echo "${_k_version}" > "${pkgdir}"/usr/lib/modules/extramodules-"${_k_version%.*}"-ARCH/version
+
+	# extra - modules
+	if [ -e "${srcdir}"/rootfs/etc/modules ]; then
+		install -dm755 "${pkgdir}"/etc
+		install -Dm644 "${srcdir}"/rootfs/etc/modules "${pkgdir}"/etc/
+	fi
+
+	# extra - mali.conf
+	install -dm755 "${pkgdir}"/etc/modules-load.d
+	install -Dm644 "${srcdir}"/mali.conf "${pkgdir}"/etc/modules-load.d/
+
+	# extra - rtl8192-blacklist.conf
+	install -dm755 "${pkgdir}"/etc/modprobe.d
+	install -Dm644 "${srcdir}"/rtl8192-blacklist.conf "${pkgdir}"/etc/modprobe.d/
+
+	# extra - 50-mali.rules
+	install -dm755 "${pkgdir}"/etc/udev/rules.d
+	install -Dm644 "${srcdir}"/50-mali.rules "${pkgdir}"/etc/udev/rules.d/
+
+	# extra - modprobe.d
+	if [ -e "${srcdir}"/rootfs/etc/modprobe.d/ ]; then
+		install -dm755 "${pkgdir}"/etc/modprobe.d
+		cp -r "${srcdir}"/rootfs/etc/modprobe.d/* "${pkgdir}"/etc/modprobe.d/
+		find "${pkgdir}"/etc/modprobe.d/ -type d -exec chmod 755 {} \;
+		find "${pkgdir}"/etc/modprobe.d/ -type f -exec chmod 644 {} \;
+	fi
+
+	# extra - lib
+	if [ -e "${srcdir}"/rootfs/lib/ ]; then
+		install -dm755 "${pkgdir}"/usr/lib
+		cp -r "${srcdir}"/rootfs/lib/* "${pkgdir}"/usr/lib/
+		find "${pkgdir}"/usr/lib/ -type d -exec chmod 755 {} \;
+		find "${pkgdir}"/usr/lib/ -type f -exec chmod 644 {} \;
+	fi
+
+	# modify install
+	sed -e "s/KERNEL_VERSION=.*/KERNEL_VERSION=${_k_version}/g" -i "${startdir}"/linux-"${pkgbase,,}".install
+}
+
+package_linux-bananapi-headers() {
+	_k_version=$(ls "${srcdir}"/rootfs/lib/modules/)
+
+	pkgdesc="Header files and scripts for building modules for linux kernel - ${_desc}"
+	depends=("linux-bananapi")
+	provides=("linux-headers=${_k_version}")
+	conflicts=("linux-sun7i-headers" "linux-headers-omap" "linux-headers-imx6")
+	cd "${pkgdir}"
+
+	# build link
+	install -dm755 "${pkgdir}"/usr/lib/modules/"${_k_version}"
+	cd "${pkgdir}"/usr/lib/modules/"${_k_version}"
+	ln -sf ../../../src/linux-"${_k_version}" build
+
+	# src
+	install -dm755 "${pkgdir}"/usr/src/linux-"${_k_version}"
+	cp -r "${srcdir}"/headers/* "${pkgdir}"/usr/src/linux-"${_k_version}"
+	find "${pkgdir}"/usr/src/linux-${_k_version}/ -type d -exec chmod 755 {} \;
+	find "${pkgdir}"/usr/src/linux-${_k_version}/ -type f -exec chmod 644 {} \;
+}
+
+# vim:set ts=2 sw=2 et:

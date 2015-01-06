@@ -1,0 +1,39 @@
+{
+	"backend": "rasprpm",
+	"configuration":
+	{
+		"computers":
+		[
+			{
+				"name": "StoneColdPC",
+				"ip_address": "192.168.0.11",
+				"read_acl": ["all"],
+				"write_acl": [],
+
+				"power_led_gpio":
+				{
+					"pin": 1,
+					"inverted": "false"
+				},
+
+				"power_switch_gpio":
+				{
+					"pin": 8,
+					"inverted": "true"
+				},
+
+				"reset_switch_gpio":
+				{
+					"pin": 9,
+					"inverted": "true"
+				},
+
+				"enter_key_gpio":
+				{
+					"pin": 7,
+					"inverted": "true"
+				}
+			}
+		]
+	}
+}

@@ -1,0 +1,26 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("bpi-led-off")
+pkgver=20150107
+pkgrel=1
+pkgdesc="Banana Pi Green LED off service"
+arch=("armv7h")
+license=("LGPL")
+install="${pkgname}.install"
+source=("${pkgname}.zip")
+md5sums=("173d1ab4af60bae910a33e9dbce15973")
+
+pkgver() {
+  date +'%Y%m%d'
+}
+
+package() {
+  install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+  install -Dm0644 "${srcdir}"/bpi-led-off.service "${pkgdir}"/usr/lib/systemd/system/
+
+  install -dm0755 "${pkgdir}"/usr/bin
+  install -Dm4755 "${srcdir}"/bpi-led-off "${pkgdir}"/usr/bin/
+  install -Dm4755 "${srcdir}"/bpi-led-on "${pkgdir}"/usr/bin/
+}
+
+# vim:set ts=2 sw=2 et:
