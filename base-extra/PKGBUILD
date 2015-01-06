@@ -12,6 +12,7 @@ depends=(
 "arch-install-scripts"
 "bash-completion"
 "btrfs-progs"
+"cloog"
 "cpio"
 "cronie"
 "dosfstools"
@@ -19,6 +20,7 @@ depends=(
 "f2fs-tools"
 "gptfdisk"
 "haveged"
+"isl"
 "mc"
 "net-tools"
 "openssh"
@@ -31,7 +33,6 @@ depends=(
 "zip"
 "zsh"
 "zsh-completions"
-"zsh-lovers"
 "zsh-syntax-highlighting"
 )
 
