@@ -1,4 +1,4 @@
-arch_stonecold_bpi-repo
+arch_bananpi_PKGBUILDs.git
 =======================
 
-Arch Linux Repository for BananaPi
+Arch Linux PKGBUILDs Repository for BananaPi/Pro
