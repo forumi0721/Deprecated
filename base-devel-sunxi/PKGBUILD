@@ -1,29 +1,33 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("base-devel-sunxi")
-pkgver=0.1
+pkgver=20150107
 pkgrel=1
 pkgdesc="Install extra packages"
 arch=("x86_64")
 url="http://localhost/"
 license=("Other")
 depends=(
-"uboot-tools"
-"libusb"
-"git"
-"wget"
-"fakeroot"
-"linux-headers"
-"zlib"
-"ncurses"
-"pkg-config"
+  "fakeroot"
+  "git"
+  "libusb"
+  "linux-headers"
+  "ncurses"
+  "pkg-config"
+  "uboot-tools"
+  "wget"
+  "zlib"
 )
 optdepends=(
-"arm-linux-gnueabihf-debian: ARM Crosstoolchain"
+  "arm-linux-gnueabihf-debian: ARM Crosstoolchain"
 )
 
+pkgver() {
+  date +'%Y%m%d'
+}
+
 package() {
-	cd "${pkgdir}"
+  echo > /dev/null
 }
 
 # vim:set ts=2 sw=2 et:

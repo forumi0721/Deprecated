@@ -1,43 +1,48 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("base-extra")
-pkgver=0.1
+pkgver=20150107
 pkgrel=1
 pkgdesc="Install extra packages"
 arch=("any")
 url="http://localhost/"
 license=("Other")
 depends=(
-"abs"
-"arch-install-scripts"
-"bash-completion"
-"btrfs-progs"
-"cloog"
-"cpio"
-"cronie"
-"dosfstools"
-"ethtool"
-"f2fs-tools"
-"gptfdisk"
-"haveged"
-"isl"
-"mc"
-"net-tools"
-"openssh"
-"p7zip"
-"pkgfile"
-"screen"
-"unzip"
-"vim"
-"wget"
-"zip"
-"zsh"
-"zsh-completions"
-"zsh-syntax-highlighting"
+  "abs"
+  "arch-install-scripts"
+  "bash-completion"
+  "btrfs-progs"
+  "cpio"
+  "cronie"
+  "dosfstools"
+  "ethtool"
+  "f2fs-tools"
+  "gptfdisk"
+  "haveged"
+  "mc"
+  "net-tools"
+  "openssh"
+  "p7zip"
+  "pkgfile"
+  "screen"
+  "unzip"
+  "vim"
+  "wget"
+  "zip"
+  "zsh"
+  "zsh-completions"
+  "zsh-syntax-highlighting"
+)
+optdepands=(
+  "isl: Library for manipulating sets and relations of integer points bounded by linear constraints"
 )
 
+pkgver() {
+  date +'%Y%m%d'
+}
+
 package() {
-  cd "${pkgdir}"
+  echo > /dev/null
 }
 
 # vim:set ts=2 sw=2 et:

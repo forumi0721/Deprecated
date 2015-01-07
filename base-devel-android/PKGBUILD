@@ -1,47 +1,51 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("base-devel-android")
-pkgver=0.1
+pkgver=20150107
 pkgrel=1
 pkgdesc="Install extra packages"
 arch=("x86_64")
 url="http://localhost/"
 license=("Other")
 depends=(
-"android-tools"
-"android-udev"
-"jdk7-openjdk"
-"git"
-"gnupg"
-"flex"
-"bison"
-"gperf"
-"sdl"
-"wxgtk"
-"squashfs-tools"
-"curl"
-"ncurses"
-"zlib"
-"schedtool"
-"perl-switch"
-"zip"
-"unzip"
-"lib32-zlib"
-"lib32-ncurses"
-"lib32-readline"
-"gcc-libs-multilib"
-"gcc-multilib"
-"lib32-gcc-libs"
+  "android-tools"
+  "android-udev"
+  "bison"
+  "curl"
+  "flex"
+  "gcc-libs-multilib"
+  "gcc-multilib"
+  "git"
+  "gnupg"
+  "gperf"
+  "jdk7-openjdk"
+  "lib32-gcc-libs"
+  "lib32-ncurses"
+  "lib32-readline"
+  "lib32-zlib"
+  "ncurses"
+  "perl-switch"
+  "schedtool"
+  "sdl"
+  "squashfs-tools"
+  "unzip"
+  "wxgtk"
+  "zip"
+  "zlib"
 )
 optdepends=(
-"android-sdk: Google Android SDK"
-"android-ndk: Android C/C++ developer kit"
-"repo:        The Multiple Git Repository Tool from the Android Open Source Project"
-"pngcrush:    A tool for optimizing the compression of PNG files"
+  "android-sdk: Google Android SDK"
+  "android-ndk: Android C/C++ developer kit"
+  "repo:        The Multiple Git Repository Tool from the Android Open Source Project"
+  "pngcrush:    A tool for optimizing the compression of PNG files"
 )
 
+pkgver() {
+  date +'%Y%m%d'
+}
+
 package() {
-	cd "${pkgdir}"
+  echo > /dev/null
 }
 
 # vim:set ts=2 sw=2 et:

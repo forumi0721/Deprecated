@@ -7,7 +7,6 @@ pkgdesc="GNU C compiler (arm-linux-gnueabihf)"
 arch=("x86_64")
 url="http://www.emdebian.org/"
 license=("GPL2")
-#depends=("cloog" "glibc" "libmpc" "zlib")
 depends=("glibc" "libmpc" "zlib")
 conflicts=("arm-linux-gnueabihf-binutils"
 	"arm-linux-gnueabihf-eglibc"
@@ -59,7 +58,6 @@ noextract=("${source[@]%%::*}")
 
 package() {
 	cd "${pkgdir}"
-
 	for src in "${noextract[@]}"; do
 		rm -rf "${pkgdir}"/debian-binary "${pkgdir}"/control.tar.gz "${pkgdir}"/data.tar.gz
 		ar x "${srcdir}"/${src}
@@ -68,7 +66,6 @@ package() {
 	done
 
 	cd "${pkgdir}"/usr/bin
-
 	ln -s arm-linux-gnueabihf-gcc-ar-4.7 arm-linux-gnueabihf-gcc-ar
 	ln -s arm-linux-gnueabihf-gcc-nm-4.7 arm-linux-gnueabihf-gcc-nm
 	ln -s arm-linux-gnueabihf-gcc-ranlib-4.7 arm-linux-gnueabihf-gcc-ranlib
@@ -78,9 +75,7 @@ package() {
 	ln -s arm-linux-gnueabihf-gcc-4.7 arm-linux-gnueabihf-gcc
 
 	cd "${pkgdir}"/usr/lib
-
 	ln -s libmpc.so.3.0.0 libmpc.so.2
-	#ln -s libcloog-isl.so.4.0.0 libcloog-debian.so.0
 }
 
 # vim:set ts=2 sw=2 et:

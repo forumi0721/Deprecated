@@ -1,28 +1,32 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("base-devel-extra")
-pkgver=0.1
+pkgver=20150107
 pkgrel=1
 pkgdesc="Install extra packages"
 arch=("any")
 url="http://localhost/"
 license=("Other")
 depends=(
-"bashdb"
-"ccache"
-"cscope"
-"ctags"
-"gdb"
-"git"
-"subversion"
-"zshdb"
+  "bashdb"
+  "ccache"
+  "cscope"
+  "ctags"
+  "gdb"
+  "git"
+  "subversion"
+  "zshdb"
 )
 optdepends=(
-"linux-headers: Header files and scripts for building modules for Linux kernel"
+  "linux-headers: Header files and scripts for building modules for Linux kernel"
 )
 
+pkgver() {
+  date +'%Y%m%d'
+}
+
 package() {
-	cd "${pkgdir}"
+  echo > /dev/null
 }
 
 # vim:set ts=2 sw=2 et:
