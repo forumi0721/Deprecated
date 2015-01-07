@@ -13,9 +13,11 @@ install="${pkgname}.install"
 source=("${pkgname}-${pkgver}-${pkgrel}-arm.bin.tar.xz::https://dl.dropboxusercontent.com/u/15043728/ArchLinuxArm/my.pogoplug.com/${pkgname}-${pkgver}-${pkgrel}-arm.pkg.tar.xz")
 md5sums=("SKIP")
 
-package() {
-	cd "${pkgdir}"
+prepare() {
+  sed 's/^After=network.target$/After=network.target httpd.service/g' -i "${srcdir}"/usr/lib/systemd/system/pogoplug.service
+}
 
+package() {
 	install -dm0755 "${pkgdir}"/usr/local
 	cp -rp "${srcdir}"/usr/local/cloudengines "${pkgdir}"/usr/local/
 
