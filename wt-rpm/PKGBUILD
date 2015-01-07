@@ -1,36 +1,40 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("wt-rpm")
-pkgver=20141223
+pkgver=20150107
 pkgrel=1
 pkgdesc="Remote Power Managemant"
 arch=("armv6h" "armv7h")
 url="https://gitorious.org/wt-rpm"
 license=("GPL")
-depends=("wt" "wiringpi" "boost-libs")
-makedepends=("wt" "wiringpi" "boost" "gcc" "cmake")
+depends=("wt" "wiringpi" "boost-libs" "liboping")
+makedepends=("wt" "wiringpi" "boost" "gcc" "cmake" "liboping")
 optdepends=("nginx: authentication  support")
-source=("${pkgname}-${pkgver}.tar.gz"
+install="${pkgname}.install"
+source=("${pkgname}.zip"
 	"${pkgname}.json")
-md5sums=("bd30e35b691f266f3857b7f465c862a7"
-	"09e4a659cf1dbf63dec1d052e50e40a8")
+md5sums=("SKIP"
+	"SKIP")
+
+pkgver() {
+  date +'%Y%m%d'
+}
 
 build() {
 	cd "${srcdir}"/"${pkgname}"
 
-	mkdir build
+	mkdir -p build
 	cd build
-	cmake .. -DCMAKE_INSTALL_PREFIX="${pkgdir}"/usr -DUSE_CON_HTTP=ON -DUSE_PING=OFF -USE_RASPRPM=ON -DUSE_DUMMY_RPM=ON
+	cmake .. -DCMAKE_INSTALL_PREFIX=${pkgdir}/usr -DUSE_CON_HTTP=ON -USE_RASPRPM=ON -DUSE_DUMMY_RPM=ON -DUSE_PING=ON
 	make
 }
 
 package() {
-	cd "${pkgdir}"
-
-	install -dm0755 "${pkgdir}"/usr/bin
+	cd "${srcdir}"/"${pkgname}"/build
 	make install
 
 	install -dm0755 "${pkgdir}"/usr/share/wtrpm
+	install -Dm0644 "${srcdir}"/"${pkgname}"/imgs/ping.png "${pkgdir}"/usr/share/wtrpm/
 	install -Dm0644 "${srcdir}"/"${pkgname}"/imgs/green_light.png "${pkgdir}"/usr/share/wtrpm/
 	install -Dm0644 "${srcdir}"/"${pkgname}"/imgs/off_light.png "${pkgdir}"/usr/share/wtrpm/
 	install -Dm0644 "${srcdir}"/"${pkgname}"/imgs/power-button.png "${pkgdir}"/usr/share/wtrpm/

@@ -1,0 +1,18 @@
+post_install() {
+	echo "To use the wt-rpm service, please run the following command:"
+	echo " # systemctl enable wtrpm.service"
+}
+
+post_upgrade() {
+	if [ -e /etc/systemd/system/multi-user.target.wants/wtrpm.service ]; then
+		echo "systemctl daemon-reload"
+		systemctl daemon-reload
+	fi
+}
+
+post_remove() {
+	if [ -e /etc/systemd/system/multi-user.target.wants/wtrpm.service ]; then
+		echo "Remove old service"
+		rm -rf /etc/systemd/system/multi-user.target.wants/wtrpm.service
+	fi
+}
