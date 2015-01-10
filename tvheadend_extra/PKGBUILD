@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("tvheadend_extra")
-pkgver=0.1
+pkgver=20150111
 pkgrel=1
 pkgdesc="tvheadend extra EPG and frequencies"
 arch=("any")
@@ -12,6 +12,10 @@ source=("kr-Cable-C&M-center-frequencies-QAM256_8VSB"
   "tv_grab_kr_epg")
 md5sums=("SKIP"
   "SKIP")
+
+pkgver() {
+  date +'%Y%m%d'
+}
 
 package() {
 	install -dm0755 "${pkgdir}"/usr/share/tvheadend/data/dvb-scan/atsc
