@@ -1,0 +1,47 @@
+#!/bin/sh
+
+sudo bash <<EOF
+if [ ! -z "$(which pacman)" ]; then 
+	echo -e "\e[0;31mpacman -Suy --noconfirm\e[0m"
+	pacman -Suy --noconfirm
+	echo
+fi
+
+if [ ! -z "$(which yaourt)" ]; then
+	echo -e "\e[0;31myaourt -Sua --noconfirm\e[0m"
+	USER="$(cat /etc/passwd | grep x:1000: | cut -f 1 -d ":")"
+	if [ -z "${USER}" ]; then
+		yaourt -Sua --noconfirm
+	else
+		sudo -u "${USER}" yaourt -Sua --noconfirm
+	fi
+	echo
+fi
+
+if [ ! -z "$(which pkgfile)" ]; then
+	echo -e "\e[0;31mpkgfile -u\e[0m"
+	pkgfile -u
+	echo
+fi
+
+if [ ! -z "$(which abs)" ]; then
+	echo -e "\e[0;31mabs\e[0m"
+	abs > /dev/null
+	echo
+fi
+
+if [ ! -z "$(which abs)" ]; then
+	echo -e "\e[0;31mpacman -Scc\e[0m"
+	echo "Y
+Y" | pacman -Scc
+	echo
+fi
+
+if [ ! -z "$(which yaourt)" ]; then
+	echo -e "\e[0;31mrm -rf /var/tmp/yaourt*\e[0m"
+	rm -rf /var/tmp/yaourt*
+	echo
+fi
+
+echo
+EOF

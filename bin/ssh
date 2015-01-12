@@ -1,0 +1,62 @@
+#!/bin/sh
+
+##Constant
+SSH=/usr/bin/ssh
+
+
+
+###Function
+function Connect {
+	local IP=$1
+	local RETURN=0
+	ping -c 1 -W 1 "${IP}" &> /dev/null
+	if [ $? -eq 0 ]; then
+		$SSH ${IP}
+		RETURN=$?
+	else
+		echo "Cannot connect ${IP}"
+		RETURN=1
+	fi
+
+	return ${RETURN}
+}
+
+
+
+###Main
+if [ ! -e "${SSH}" ]; then
+	echo "command not found : ssh"
+	exit 1
+fi
+
+BASENAME="$(basename "${0}")"
+EXIT=
+
+case "${BASENAME}" in
+	"sshpc")
+		Connect 192.168.0.11
+		EXIT=$?
+		;;
+	"sshnas")
+		Connect 192.168.0.21
+		EXIT=$?
+		;;
+	"sshpogo")
+		Connect 192.168.0.22
+		EXIT=$?
+		;;
+	"sshpi")
+		Connect 192.168.0.31
+		EXIT=$?
+		;;
+	"ssh")
+		$SSH $*
+		EXIT=$?
+		;;
+	"*")
+		echo "Unkown server"
+		EXIT=1
+esac
+
+exit ${EXIT}
+
