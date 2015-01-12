@@ -1,0 +1,35 @@
+#!/bin/sh
+
+if [ -z "$(which gpio)" ]; then
+	echo "command not found : gpio"
+	exit 1
+fi
+
+if [[ "${UID}" -ne 0 ]]; then
+	sudo "${0}" $*
+	exit ${?}
+fi
+
+gpio mode 1 in
+LED=$(gpio read 1)
+if [[ "${LED}" == "1" ]]; then
+	echo "PC Power LED Status : On"
+else
+	echo "PC Power LED Status : Off"
+fi
+
+gpio mode 7 out
+gpio write 7 0
+echo "Enter Key Pressed"
+sleep 0.1
+gpio write 7 1
+
+sleep 0.5
+LED=$(gpio read 1)
+if [[ "${LED}" == "1" ]]; then
+	echo "PC Power LED Status : On"
+else
+	echo "PC Power LED Status : Off"
+fi
+
+exit 0
