@@ -50,8 +50,33 @@ case "${BASENAME}" in
 		EXIT=$?
 		;;
 	"ssh")
-		$SSH $*
-		EXIT=$?
+		if [ $# -eq 1 ]; then
+			case "${1}" in
+				"pc")
+					Connect 192.168.0.11
+					EXIT=$?
+					;;
+				"nas")
+					Connect 192.168.0.21
+					EXIT=$?
+					;;
+				"pogo")
+					Connect 192.168.0.22
+					EXIT=$?
+					;;
+				"pi")
+					Connect 192.168.0.31
+					EXIT=$?
+					;;
+				"*")
+					$SSH $*
+					EXIT=$?
+					;;
+			esac
+		else
+			$SSH $*
+			EXIT=$?
+		fi
 		;;
 	"*")
 		echo "Unkown server"

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -z "$(which gpio)" ]; then
+if [ -z "$(which gpio 2> /dev/null)" ]; then
 	echo "command not found : gpio"
 	exit 1
 fi

@@ -1,13 +1,13 @@
 #!/bin/sh
 
 sudo bash <<EOF
-if [ ! -z "$(which pacman)" ]; then 
+if [ ! -z "$(which pacman 2> /dev/null)" ]; then 
 	echo -e "\e[0;31mpacman -Suy --noconfirm\e[0m"
 	pacman -Suy --noconfirm
 	echo
 fi
 
-if [ ! -z "$(which yaourt)" ]; then
+if [ ! -z "$(which yaourt 2> /dev/null)" ]; then
 	echo -e "\e[0;31myaourt -Sua --noconfirm\e[0m"
 	USER="$(cat /etc/passwd | grep x:1000: | cut -f 1 -d ":")"
 	if [ -z "${USER}" ]; then
@@ -18,26 +18,26 @@ if [ ! -z "$(which yaourt)" ]; then
 	echo
 fi
 
-if [ ! -z "$(which pkgfile)" ]; then
+if [ ! -z "$(which pkgfile 2> /dev/null)" ]; then
 	echo -e "\e[0;31mpkgfile -u\e[0m"
 	pkgfile -u
 	echo
 fi
 
-if [ ! -z "$(which abs)" ]; then
+if [ ! -z "$(which abs 2> /dev/null)" ]; then
 	echo -e "\e[0;31mabs\e[0m"
 	abs > /dev/null
 	echo
 fi
 
-if [ ! -z "$(which abs)" ]; then
+if [ ! -z "$(which abs 2> /dev/null)" ]; then
 	echo -e "\e[0;31mpacman -Scc\e[0m"
 	echo "Y
 Y" | pacman -Scc
 	echo
 fi
 
-if [ ! -z "$(which yaourt)" ]; then
+if [ ! -z "$(which yaourt 2> /dev/null)" ]; then
 	echo -e "\e[0;31mrm -rf /var/tmp/yaourt*\e[0m"
 	rm -rf /var/tmp/yaourt*
 	echo
