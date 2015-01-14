@@ -1,6 +1,6 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
-pkgname=tvheadend
+pkgname=tvheadend-release
 pkgver=3.5.248
 pkgrel=1
 pkgdesc="TV streaming server for Linux"
