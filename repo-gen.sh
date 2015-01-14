@@ -22,6 +22,7 @@ do
 			pushd . &> /dev/null
 			cd repo/${archdir}
 			repo-add StoneCold.db.tar.gz "$(basename "${pkg}")"
+			repo-add -f StoneCold.files.tar.gz "$(basename "${pkg}")"
 			popd &> /dev/null
 		done
 	else
@@ -29,6 +30,7 @@ do
 		pushd . &> /dev/null
 		cd repo/${arch}
 		repo-add StoneCold.db.tar.gz "$(basename "${pkg}")"
+		repo-add -f StoneCold.files.tar.gz "$(basename "${pkg}")"
 		popd &> /dev/null
 	fi
 done
@@ -40,7 +42,8 @@ if [ ! -e /media/StoneColdNAS/nas_htdocs ]; then
 fi
 
 if [ -e /media/StoneColdNAS/nas_htdocs ]; then
-	rm -rf /media/StoneColdNAS/nas_htdocs/arch
-	cp -r repo /media/StoneColdNAS/nas_htdocs/arch
+	rm -rf /media/StoneColdNAS/nas_htdocs/arch/stonecold
+	mkdir -p /media/StoneColdNAS/nas_htdocs/arch
+	cp -r repo /media/StoneColdNAS/nas_htdocs/arch/stonecold
 fi
 
