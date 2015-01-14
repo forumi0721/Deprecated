@@ -10,7 +10,9 @@ license=("Other")
 depends=(
   "abs"
   "arch-install-scripts"
+  "autostart"
   "bash-completion"
+  "btrfs-completion"
   "btrfs-progs"
   "cpio"
   "cronie"

@@ -12,6 +12,8 @@ depends=(
   "nfs-utils"
   "vsftpd"
   "netatalk"
+  "nginx"
+  "vlmcsd"
 )
 
 pkgver() {
