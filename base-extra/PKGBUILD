@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("base-extra")
-pkgver=20150107
+pkgver=20150115
 pkgrel=1
 pkgdesc="Install extra packages"
 arch=("any")
@@ -19,6 +19,8 @@ depends=(
   "f2fs-tools"
   "gptfdisk"
   "haveged"
+  "hd-idle"
+  "isl"
   "mc"
   "net-tools"
   "openssh"
@@ -26,15 +28,15 @@ depends=(
   "pkgfile"
   "screen"
   "unzip"
+  "vi-vim-symlink"
   "vim"
   "wget"
+  "yaourt"
   "zip"
   "zsh"
   "zsh-completions"
+  "oh-my-zsh-git"
   "zsh-syntax-highlighting"
-)
-optdepands=(
-  "isl: Library for manipulating sets and relations of integer points bounded by linear constraints"
 )
 
 pkgver() {
