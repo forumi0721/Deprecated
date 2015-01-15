@@ -1,0 +1,32 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("stonecold-xorg-meta")
+pkgver=20150115
+pkgrel=1
+pkgdesc="Install xorg packages"
+arch=("any")
+url="http://localhost/"
+license=("Other")
+depends=(
+  "chromium"
+  "lightdm"
+  "lightdm-gtk3-greeter"
+  "nabi"
+  "sylpheed"
+  "tango-icon-theme"
+  "thunar-trash"
+  "tigervnc"
+  "ttf-bitstream-vera-sans-mono"
+  "ttf-nanum-fonts"
+  "ttf-win81-fonts-korean"
+)
+
+pkgver() {
+  date +'%Y%m%d'
+}
+
+package() {
+  echo > /dev/null
+}
+
+# vim:set ts=2 sw=2 et:

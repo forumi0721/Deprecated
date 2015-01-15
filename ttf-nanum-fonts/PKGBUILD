@@ -11,7 +11,7 @@ depends=("fontconfig" "xorg-fonts-encodings" "xorg-font-utils")
 conflicts=("ttf-nanum" "ttf-nanumgothic_coding")
 provides=("ttf-font")
 install="${pkgname}.install"
-source=("${pkgname}.zip")
+source=("http://forumi0721.ipdisk.co.kr:8000/arch/distfiles/${pkgname}.zip")
 md5sums=("dd0bda05fe1cda28acdbb9941f40ead9")
 
 package() {

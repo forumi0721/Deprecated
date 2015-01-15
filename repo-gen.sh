@@ -6,12 +6,12 @@ if [ -z "$(which repo-add 2> /dev/null)" ]; then
 fi
 
 rm -rf repo
-archs=($(find . -name *.pkg.tar.* | sed -e 's/^.*-//g' -e 's/\..*$//g' | sort -u | grep -v any))
+archs=($(ls */*.pkg.tar.* | sed -e 's/^.*-//g' -e 's/\..*$//g' | sort -u | grep -v any))
 for archdir in ${archs[@]}
 do
 	mkdir -p repo/${archdir}
 done
-for pkg in $(find . -name *.pkg.tar.*)
+for pkg in $(ls */*.pkg.tar.*)
 do
 	echo "Generate ${pkg}"
 	arch=$(echo $pkg | sed -e 's/^.*-//g' -e 's/\..*$//g')

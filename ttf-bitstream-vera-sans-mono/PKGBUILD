@@ -10,7 +10,7 @@ license=("custom")
 depends=("fontconfig" "xorg-fonts-encodings" "xorg-font-utils")
 provides=("ttf-font")
 install="${pkgname}.install"
-source=("${pkgname}.zip")
+source=("http://forumi0721.ipdisk.co.kr:8000/arch/distfiles/${pkgname}.zip")
 md5sums=("1060cc1a5ef58d279d6d9413f7214dad")
 
 package() {

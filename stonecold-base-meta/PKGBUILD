@@ -1,0 +1,50 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("stonecold-base-meta")
+pkgver=20150115
+pkgrel=1
+pkgdesc="Install base packages"
+arch=("any")
+url="http://localhost/"
+license=("Other")
+depends=(
+  "abs"
+  "arch-install-scripts"
+  "bash-completion"
+  "btrfs-progs"
+  "cpio"
+  "cronie"
+  "dosfstools"
+  "ethtool"
+  "f2fs-tools"
+  "gptfdisk"
+  "haveged"
+  "hd-idle"
+  "isl"
+  "mc"
+  "net-tools"
+  "openssh"
+  "p7zip"
+  "pkgfile"
+  "screen"
+  "unzip"
+  "vi-vim-symlink"
+  "vim"
+  "wget"
+  "yaourt"
+  "zip"
+  "zsh"
+  "zsh-completions"
+  "oh-my-zsh-git"
+  "zsh-syntax-highlighting"
+)
+
+pkgver() {
+  date +'%Y%m%d'
+}
+
+package() {
+  echo > /dev/null
+}
+
+# vim:set ts=2 sw=2 et:

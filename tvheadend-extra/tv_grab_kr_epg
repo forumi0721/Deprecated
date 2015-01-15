@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+	curl -s -f http://forumi0721.ipdisk.co.kr:8000/xmltv.xml
+	exit $?
+fi
+
+case "$1" in
+	--description)
+	echo "EPG grabber"
+	;;
+
+	--version)
+	echo "1.0"
+	;;
+
+	--capabilities)
+	echo "baseline"
+	;;
+esac

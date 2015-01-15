@@ -11,7 +11,7 @@ depends=("fontconfig" "xorg-fonts-encodings" "xorg-font-utils")
 conflicts=("ttf-win71-fonts-cjk" "ttf-win71-fonts")
 provides=("ttf-font")
 install="${pkgname}.install"
-source=("${pkgname}.zip")
+source=("http://forumi0721.ipdisk.co.kr:8000/arch/distfiles/${pkgname}.zip")
 md5sums=("42607dc7c20d62ffeda044104c191c9e")
 
 package() {
