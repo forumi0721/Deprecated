@@ -4,7 +4,7 @@ buildarch=4
 
 pkgbase="BananaPi"
 pkgname=("uboot-bananapi" "linux-bananapi" "linux-bananapi-headers")
-pkgver=20150114
+pkgver=20150115
 pkgrel=1
 arch=("armv7h")
 url="https://github.com/LeMaker/lemaker-bsp"
@@ -36,12 +36,9 @@ package_uboot-bananapi() {
 	cp -r "${srcdir}"/bootloader/* "${pkgdir}"/boot/
 	find "${pkgdir}"/boot/ -type d -exec chmod 755 {} \;
 	find "${pkgdir}"/boot/ -type f -exec chmod 644 {} \;
-	#install -Dm644 "${srcdir}"/kernel/script.bin "${pkgdir}"/boot/
+	install -Dm644 "${srcdir}"/kernel/script.bin "${pkgdir}"/boot/
 	bin2fex "${srcdir}"/kernel/script.bin > "${pkgdir}"/boot/script.fex
-	sed -i -e 's/leds_trigger_1 = "heartbeat"/leds_trigger_1 = "none"/g' -e 's/fb0_framebuffer_num = 2/sunxi_fb_mem_reserve = 32\
-fb0_framebuffer_num = 3/g' "${pkgdir}"/boot/script.fex
-	fex2bin "${pkgdir}"/boot/script.fex > "${pkgdir}"/boot/script.bin
-	chmod 644 "${pkgdir}"/boot/script.bin
+	chmod 644 "${pkgdir}"/boot/script.fex
 	install -Dm644 "${srcdir}"/uEnv.txt "${pkgdir}"/boot/
 }
 
