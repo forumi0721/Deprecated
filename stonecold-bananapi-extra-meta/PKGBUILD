@@ -1,0 +1,27 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("stonecold-bananapi-extra-meta")
+pkgver=20150115
+pkgrel=1
+pkgdesc="Install BananaPi extra packages"
+arch=("armv7h")
+url="http://localhost/"
+license=("Other")
+depends=(
+  "bpi-led-off"
+  "python-bananapi-gpio"
+  "python2-bananapi-gpio"
+  "stonecold-bananapi-meta"
+  "wiringbp-bpi-git"
+  "wt-rpm"
+)
+
+pkgver() {
+  date +'%Y%m%d'
+}
+
+package() {
+  echo > /dev/null
+}
+
+# vim:set ts=2 sw=2 et:
