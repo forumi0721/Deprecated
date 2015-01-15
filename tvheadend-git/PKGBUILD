@@ -11,7 +11,7 @@ pkgdesc="TV streaming server for Linux"
 arch=('arm' 'armv6h' 'armv7h' 'i686' 'x86_64')
 url="https://tvheadend.org/"
 license=('GPL3')
-depends=('avahi' 'openssl' 'python2' 'uriparser')
+depends=('avahi' 'openssl' 'python2' 'uriparser' 'libiconv')
 makedepends=('git')
 optdepends=(
 	'xmltv: For an alternative source of programme listings'
