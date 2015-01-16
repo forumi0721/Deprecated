@@ -1,9 +1,9 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
-pkgname=("base-devel-sunxi")
-pkgver=20150107
+pkgname=("stonecold-devel-sunxi-meta")
+pkgver=20150116
 pkgrel=1
-pkgdesc="Install extra packages"
+pkgdesc="Install sunxi packages"
 arch=("x86_64")
 url="http://localhost/"
 license=("Other")

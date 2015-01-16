@@ -1,9 +1,9 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
-pkgname=("base-devel-android")
-pkgver=20150107
+pkgname=("stonecold-devel-android-meta")
+pkgver=20150116
 pkgrel=1
-pkgdesc="Install extra packages"
+pkgdesc="Install android packages"
 arch=("x86_64")
 url="http://localhost/"
 license=("Other")
