@@ -6,6 +6,7 @@ ExecStart=/etc/init.d/vmware-tools start
 ExecStop=/etc/init.d/vmware-tools stop
 PIDFile=/var/lock/subsys/vmware
 TimeoutSec=0
+TimeoutStopSec=1
 RemainAfterExit=yes
 
 [Install]
