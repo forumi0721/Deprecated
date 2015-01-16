@@ -10,7 +10,9 @@ license=("Other")
 depends=(
   "abs"
   "arch-install-scripts"
+  "autostart"
   "bash-completion"
+  "btrfs-completion"
   "btrfs-progs"
   "cpio"
   "cronie"
@@ -24,6 +26,7 @@ depends=(
   "mc"
   "net-tools"
   "ntfs-3g"
+  "oh-my-zsh-git"
   "openssh"
   "p7zip"
   "pkgfile"
@@ -36,7 +39,6 @@ depends=(
   "zip"
   "zsh"
   "zsh-completions"
-  "oh-my-zsh-git"
   "zsh-syntax-highlighting"
 )
 
