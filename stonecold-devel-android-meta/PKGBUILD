@@ -34,10 +34,12 @@ depends=(
   "zlib"
 )
 optdepends=(
-  "android-sdk: Google Android SDK"
-  "android-ndk: Android C/C++ developer kit"
-  "repo:        The Multiple Git Repository Tool from the Android Open Source Project"
-  "pngcrush:    A tool for optimizing the compression of PNG files"
+  "android-apktool:         a tool for reengineering Android apk files"
+  "android-ndk:             Android C/C++ developer kit"
+  "android-sdk:             Google Android SDK"
+  "android-sdk-build-tools: Build-Tools for Google Android SDK (aapt, aidl, dexdump, dx, llvm-rs-cc)"
+  "pngcrush:                A tool for optimizing the compression of PNG files"
+  "repo:                    The Multiple Git Repository Tool from the Android Open Source Project"
 )
 
 pkgver() {

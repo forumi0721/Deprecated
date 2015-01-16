@@ -1,0 +1,22 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("vmware-tools-service")
+pkgver=20150116
+pkgrel=1
+pkgdesc="VMWare tools systemd service"
+arch=("x86_64")
+license=("LGPL")
+install="${pkgname}.install"
+source=("vmware-tools.service")
+md5sums=("SKIP")
+
+pkgver() {
+  date +'%Y%m%d'
+}
+
+package() {
+	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+	install -Dm0644 "${srcdir}"/vmware-tools.service "${pkgdir}"/usr/lib/systemd/system/
+}
+
+# vim:set ts=2 sw=2 et:

@@ -8,6 +8,7 @@ arch=("x86_64")
 url="http://localhost/"
 license=("Other")
 depends=(
+  "arm-linux-gnueabihf-debian"
   "fakeroot"
   "git"
   "libusb"
