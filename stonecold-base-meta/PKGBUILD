@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-meta")
-pkgver=20150115
+pkgver=20150116
 pkgrel=1
 pkgdesc="Install base packages"
 arch=("any")
@@ -10,7 +10,9 @@ license=("Other")
 depends=(
   "abs"
   "arch-install-scripts"
+  "autostart"
   "bash-completion"
+  "btrfs-completion"
   "btrfs-progs"
   "cpio"
   "cronie"
@@ -23,6 +25,8 @@ depends=(
   "isl"
   "mc"
   "net-tools"
+  "ntfs-3g"
+  "oh-my-zsh-git"
   "openssh"
   "p7zip"
   "pkgfile"
@@ -35,7 +39,6 @@ depends=(
   "zip"
   "zsh"
   "zsh-completions"
-  "oh-my-zsh-git"
   "zsh-syntax-highlighting"
 )
 

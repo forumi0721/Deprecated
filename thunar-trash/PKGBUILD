@@ -7,7 +7,8 @@ pkgdesc="Thuar Trash/network fix"
 arch=("any")
 url="https://wiki.archlinux.org/index.php/Thunar#Trash.2Fnetwork_icons_disappear_randomly"
 license=("Other")
-depends=("thunar")
+depends=("thunar"
+  "gvfs")
 source=("Thunar")
 md5sums=("SKIP")
 

@@ -1,0 +1,20 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("btrfs-completion")
+pkgver=0.1
+pkgrel=1
+pkgdesc="Programmable completion for the bash shell (btrfs)"
+arch=("any")
+license=("GPL")
+depends=("bash" "bash-completion" "btrfs-progs")
+source=("btrfs")
+md5sums=("74a506cb86f32a508e1df5a4598e416b")
+
+package() {
+	cd "${pkgdir}"
+
+	install -dm0755 "${pkgdir}"/usr/share/bash-completion/completions/
+	install -Dm0644 "${srcdir}"/btrfs "${pkgdir}"/usr/share/bash-completion/completions/
+}
+
+# vim:set ts=2 sw=2 et:
