@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-pc-meta")
-pkgver=20150116
+pkgver=20150117.1
 pkgrel=1
 pkgdesc="Install pc packages"
 arch=("x86_64")
