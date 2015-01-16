@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-meta")
-pkgver=20150115
+pkgver=20150116
 pkgrel=1
 pkgdesc="Install base packages"
 arch=("any")
@@ -23,6 +23,7 @@ depends=(
   "isl"
   "mc"
   "net-tools"
+  "ntfs-3g"
   "openssh"
   "p7zip"
   "pkgfile"

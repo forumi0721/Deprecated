@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-xorg-meta")
-pkgver=20150115
+pkgver=20150116
 pkgrel=1
 pkgdesc="Install xorg packages"
 arch=("any")
@@ -9,6 +9,10 @@ url="http://localhost/"
 license=("Other")
 depends=(
   "chromium"
+  "gvfs"
+  "gvfs-afp"
+  "gvfs-mtp"
+  "gvfs-smb"
   "lightdm"
   "lightdm-gtk3-greeter"
   "nabi"
