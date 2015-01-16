@@ -24,6 +24,9 @@ depends=(
   "ttf-nanum-fonts"
   "ttf-win81-fonts-korean"
 )
+optdepends=(
+  "chromium-pepper-flash: Google Chrome's Pepper Flash plugin for Chromium (stable version)"
+)
 
 pkgver() {
   date +'%Y%m%d'
