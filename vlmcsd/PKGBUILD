@@ -8,7 +8,7 @@ arch=("arm" "armv6h" "armv7h" "i686" "x86_64")
 url="http://forums.mydigitallife.info/threads/50234-Emulated-KMS-Servers-on-non-Windows-platforms/"
 license=("GPL")
 install="${pkgname}.install"
-source=("${pkgname}-${pkgver}.zip"
+source=("http://forumi0721.ipdisk.co.kr:8000/arch/distfiles/${pkgname}-${pkgver}.zip"
 	"${pkgname}.service")
 md5sums=("12406fe6b054406035afad63a16f9d22"
 	"197306c5f3bc511fce5f7b30f747a3f6")

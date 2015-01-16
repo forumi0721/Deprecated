@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("ttf-nanum-fonts")
-pkgver=0.1
+pkgver=20150117.1
 pkgrel=1
 pkgdesc="Nanum fonts"
 arch=("any")
@@ -14,9 +14,26 @@ install="${pkgname}.install"
 source=("http://forumi0721.ipdisk.co.kr:8000/arch/distfiles/${pkgname}.zip")
 md5sums=("dd0bda05fe1cda28acdbb9941f40ead9")
 
-package() {
-	cd "${pkgdir}"
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
 
+package() {
 	install -dm0755 "${pkgdir}"/usr/share/fonts/TTF
 	install -Dm0644 "${srcdir}"/*.ttf "${pkgdir}"/usr/share/fonts/TTF/
 }

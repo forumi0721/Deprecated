@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-meta")
-pkgver=20150116
+pkgver=20150117.2
 pkgrel=1
 pkgdesc="Install base packages"
 arch=("any")
@@ -30,6 +30,7 @@ depends=(
   "openssh"
   "p7zip"
   "pkgfile"
+  "unrar"
   "screen"
   "unzip"
   "vi-vim-symlink"
@@ -43,7 +44,22 @@ depends=(
 )
 
 pkgver() {
-  date +'%Y%m%d'
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)" 
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
 }
 
 package() {
