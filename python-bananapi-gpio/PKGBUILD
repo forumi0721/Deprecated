@@ -1,7 +1,8 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("python-bananapi-gpio")
-pkgver=20150107
+_gitname="python-bananapi-gpio"
+pkgver=3+g7f824e8
 pkgrel=1
 pkgdesc="Python library for GPIO access on a Banana Pi"
 arch=("any")
@@ -12,20 +13,21 @@ makedepends=("git" "python-setuptools")
 provides=("python-raspberry-gpio") 
 conflicts=("python-raspberry-gpio")
 replace=("python-raspberry-gpio")
-source=("git+https://github.com/LeMaker/RPi.GPIO_BP.git")
+source=("${_gitname}::git+https://github.com/LeMaker/RPi.GPIO_BP.git")
 md5sums=("SKIP")
 
 pkgver() {
-  date +'%Y%m%d'
+  cd "${_gitname}"
+  echo $(git rev-list --count HEAD)+g$(git rev-parse --short HEAD)
 }
 
 build() {
-	cd "${srcdir}"/RPi.GPIO_BP
+	cd "${srcdir}"/"${_gitname}"
 	python setup.py build
 }
 
 package() {
-	cd "${srcdir}"/RPi.GPIO_BP
+	cd "${srcdir}"/"${_gitname}"
 	python setup.py install --prefix=/usr --root="${pkgdir}" --optimize=1
 }
 
