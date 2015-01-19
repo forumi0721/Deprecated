@@ -216,7 +216,7 @@ static const struct xc5000_fw_cfg xc5000a_1_6_114 = {
 };
 
 static const struct xc5000_fw_cfg xc5000c_41_024_5 = {
-	.name = "dvb-fe-xc5000c-41.024.5.fw",
+	.name = "dvb-fe-xc5000c-4.1.30.7.fw",
 	.size = 16497,
 };
 
