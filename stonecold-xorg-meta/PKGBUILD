@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-xorg-meta")
-pkgver=20150117.2
+pkgver=20150120.1
 pkgrel=1
 pkgdesc="Install xorg packages"
 arch=("any")
@@ -23,6 +23,7 @@ depends=(
   "ttf-bitstream-vera-sans-mono"
   "ttf-nanum-fonts"
   "ttf-win81-fonts-korean"
+  "wxgtk2.8"
 )
 optdepends=(
   "chromium-pepper-flash: Google Chrome's Pepper Flash plugin for Chromium (stable version)"
