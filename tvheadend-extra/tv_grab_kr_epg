@@ -2,7 +2,7 @@
 
 if [ -z "$1" ]; then
 	#curl -s -f http://forumi0721.ipdisk.co.kr:8000/tvheadend/xmltv.xml
-	cat /home/hts/xmltv.xml
+	zcat /home/hts/xmltv.xml.gz
 	exit $?
 fi
 
