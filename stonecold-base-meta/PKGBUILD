@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-meta")
-pkgver=20150123.1
+pkgver=20150123.2
 pkgrel=1
 pkgdesc="Install base packages"
 arch=("any")
@@ -38,6 +38,7 @@ depends=(
   "vi-vim-symlink"
   "vim"
   "wget"
+  "wput"
   "yaourt"
   "zip"
   "zsh"

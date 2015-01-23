@@ -1,13 +1,14 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-server-meta")
-pkgver=20150117.1
+pkgver=20150124.1
 pkgrel=1
 pkgdesc="Install server packages"
 arch=("any")
 url="http://localhost/"
 license=("Other")
 depends=(
+  "apache-tools"
   "samba"
   "nfs-utils"
   "vsftpd"
