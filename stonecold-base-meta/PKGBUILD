@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-meta")
-pkgver=20150117.2
+pkgver=20150123.1
 pkgrel=1
 pkgdesc="Install base packages"
 arch=("any")
@@ -17,6 +17,7 @@ depends=(
   "cpio"
   "cronie"
   "dosfstools"
+  "elinks"
   "ethtool"
   "f2fs-tools"
   "gptfdisk"
@@ -24,6 +25,7 @@ depends=(
   "hd-idle"
   "isl"
   "mc"
+  "ncftp"
   "net-tools"
   "ntfs-3g"
   "oh-my-zsh-git"
