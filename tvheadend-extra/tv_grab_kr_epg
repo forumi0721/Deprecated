@@ -1,8 +1,7 @@
 #!/bin/bash
 
 if [ -z "$1" ]; then
-	#curl -s -f http://forumi0721.ipdisk.co.kr:8000/tvheadend/xmltv.xml
-	zcat /home/hts/xmltv.xml.gz
+	curl -s -f http://forumi0721.ipdisk.co.kr:8000/tvheadend/xmltv.xml.gz | gunzip
 	exit $?
 fi
 
