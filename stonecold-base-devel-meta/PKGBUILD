@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-devel-meta")
-pkgver=20150125.1
+pkgver=20150128.1
 pkgrel=1
 pkgdesc="Install base-devel packages"
 arch=("any")
@@ -18,8 +18,8 @@ depends=(
   "git"
   "jdk7-openjdk"
   "subversion"
-  "zshdb"
 )
+#"zshdb"
 
 pkgver() {
   local ldate="$(date +'%Y%m%d')"
