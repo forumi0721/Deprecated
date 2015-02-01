@@ -1,21 +1,16 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
-pkgname=("stonecold-server-meta")
+pkgname=("stonecold-xorg-apps-meta")
 pkgver=20150201.1
 pkgrel=1
-pkgdesc="Install server packages"
+pkgdesc="Install xorg apps packages"
 arch=("any")
 url="http://localhost/"
 license=("Other")
 depends=(
-  "apache-tools"
-  "mariadb"
-  "netatalk"
-  "nfs-utils"
-  "nginx"
-  "samba"
-  "vlmcsd"
-  "vsftpd"
+  "gimp"
+  "libreoffice-fresh"
+  "libreoffice-fresh-ko"
 )
 
 pkgver() {
