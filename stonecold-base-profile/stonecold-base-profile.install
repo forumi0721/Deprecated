@@ -1,0 +1,9 @@
+post_install() {
+	if [ -z "$(grep "bash.bashrc2" /etc/bash.bashrc)" ]; then
+		echo "[ -r /etc/bash.bashrc2  ] && . /etc/bash.bashrc2" >> /etc/bash.bashrc
+	fi
+}
+
+post_remove() {
+	sed -i '/bash.bashrc2/d' /etc/bash.bashrc
+}
