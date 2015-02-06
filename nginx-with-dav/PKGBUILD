@@ -5,7 +5,8 @@
 # Contributor: Miroslaw Szot <mss@czlug.icis.pcz.pl>
 # Contributor: Daniel Micay <danielmicay@gmail.com>
 
-pkgname=nginx
+_pkgname=nginx
+pkgname=nginx-with-dav
 pkgver=1.6.2
 pkgrel=2
 pkgdesc='Lightweight HTTP server and IMAP/POP3 proxy server with WebDAV missing methods support'
@@ -14,6 +15,8 @@ url='http://nginx.org'
 license=('custom')
 depends=('pcre' 'zlib' 'openssl')
 #makedepends=('hardening-wrapper')
+conflicts=('nginx' 'nginx-unstable' 'nginx-svn' 'nginx-devel' 'nginx-custom-dev' 'nginx-full')
+provides=('nginx')
 backup=('etc/nginx/fastcgi.conf'
         'etc/nginx/fastcgi_params'
         'etc/nginx/koi-win'
@@ -35,7 +38,7 @@ md5sums=('d1b55031ae6e4bce37f8776b94d8b930'
          '19a26a61c8afe78defb8b4544f79a9a0')
 
 build() {
-  cd $pkgname-$pkgver
+  cd $_pkgname-$pkgver
 
   ./configure \
     --prefix=/etc/nginx \
@@ -76,7 +79,7 @@ build() {
 }
 
 package() {
-  cd $pkgname-$pkgver
+  cd $_pkgname-$pkgver
   make DESTDIR="$pkgdir" install
 
   install -Dm644 contrib/vim/ftdetect/nginx.vim \
@@ -104,7 +107,7 @@ package() {
 
   install -Dm644 ../logrotate "$pkgdir"/etc/logrotate.d/nginx
   install -Dm644 ../service "$pkgdir"/usr/lib/systemd/system/nginx.service
-  install -Dm644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+  install -Dm644 LICENSE "$pkgdir"/usr/share/licenses/$_pkgname/LICENSE
 
   rmdir "$pkgdir"/run
 

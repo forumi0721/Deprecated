@@ -1,8 +1,0 @@
-#!/bin/sh
-
-SOURCETYPE="AUR"
-SOURCEPATH="https://aur.archlinux.org/packages/li/libiconv/libiconv.tar.gz"
-
-function GetSourcePatch {
-	sed -i "s/arch=('i686' 'x86_64')/arch=('i686' 'x86_64' 'armv7h')/g" PKGBUILD
-}

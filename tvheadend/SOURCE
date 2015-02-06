@@ -4,5 +4,7 @@ SOURCETYPE="AUR"
 SOURCEPATH="https://aur.archlinux.org/packages/tv/tvheadend/tvheadend.tar.gz"
 
 function GetSourcePatch {
-	sed -i "s/arch=('i686' 'x86_64' 'armv6h')/arch=('i686' 'x86_64' 'armv6h' 'armv7h')/g" PKGBUILD
+	if [ -z "$(grep "arch=('i686' 'x86_64' 'armv6h' 'armv7h')" PKGBUILD)" ]; then
+		sed -i "s/arch=('i686' 'x86_64' 'armv6h')/arch=('i686' 'x86_64' 'armv6h' 'armv7h')/g" PKGBUILD
+	fi
 }

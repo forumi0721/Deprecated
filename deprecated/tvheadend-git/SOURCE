@@ -1,0 +1,19 @@
+#!/bin/sh
+
+SOURCETYPE="AUR"
+SOURCEPATH="https://aur.archlinux.org/packages/tv/tvheadend-git/tvheadend-git.tar.gz"
+
+function GetSourcePatch {
+	if [ -z "$(grep "_gitname='tvheadend-get'" PKGBUILD)" ]; then
+		sed -i "s/_gitname='tvheadend'/_gitname='tvheadend-git'/g" PKGBUILD
+	fi
+	if [ -z "$(grep "armv7h" PKGBUILD)" ]; then
+		sed -i "s/arch=('i686' 'x86_64')/arch=('i686' 'x86_64' 'armv7h')/g" PKGBUILD
+	fi
+	if [ -z "$(grep "depends=('avahi' 'openssl' 'python2' 'uriparser' 'libiconv' 'ffmpeg')" PKGBUILD)" ]; then
+		sed -i "s/depends=('avahi' 'openssl' 'python2')/depends=('avahi' 'openssl' 'python2' 'uriparser' 'libiconv' 'ffmpeg')/g" PKGBUILD
+	fi
+	if [ -z "$(grep "source=(\"\${_gitname}::git+https:\/\/github.com\/tvheadend\/tvheadend.git\"" PKGBUILD)" ]; then
+		sed -i "s/source=(\"git+https:\/\/github.com\/tvheadend\/tvheadend.git\"/source=(\"\${_gitname}::git+https:\/\/github.com\/tvheadend\/tvheadend.git\"/g" PKGBUILD
+	fi
+}
