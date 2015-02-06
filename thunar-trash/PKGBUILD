@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("thunar-trash")
-pkgver=20150117.1
+pkgver=20150206.1
 pkgrel=1
 pkgdesc="Thuar Trash/network fix"
 arch=("any")

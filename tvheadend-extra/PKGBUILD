@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("tvheadend-extra")
-pkgver=20150126.1
+pkgver=20150206.1
 pkgrel=1
 pkgdesc="tvheadend extra EPG and frequencies"
 arch=("any")

@@ -6,7 +6,7 @@ pkgname=nabi
 pkgver=1.0.0
 pkgrel=4
 pkgdesc="Easy and Powerful GNU XIM for Korean in X Window System"
-arch=(armv7h i686 x86_64)
+arch=(i686 x86_64 armv7h)
 url="http://code.google.com/p/nabi/"
 license=('GNU GPL v2')
 depends=('gtk2' 'libhangul>=0.1.0')
