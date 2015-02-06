@@ -2,8 +2,12 @@ post_install() {
 	if [ -z "$(grep "bash.bashrc2" /etc/bash.bashrc)" ]; then
 		echo "[ -r /etc/bash.bashrc2  ] && . /etc/bash.bashrc2" >> /etc/bash.bashrc
 	fi
+	sed -i "s/^\(alias .*\)$/#\1/g" /etc/skel/.bashrc
+	sed -i "s/^\(PS1=.*\)$/#\1/g" /etc/skel/.bashrc
 }
 
 post_remove() {
 	sed -i '/bash.bashrc2/d' /etc/bash.bashrc
+	sed -i "s/^#\(alias .*\)$/\1/g" /etc/skel/.bashrc
+	sed -i "s/^#\(PS1=.*\)$/\1/g" /etc/skel/.bashrc
 }
