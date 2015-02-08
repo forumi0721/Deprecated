@@ -1,0 +1,72 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("stonecold-base-meta")
+pkgver=20150206.1
+pkgrel=1
+pkgdesc="Install base packages"
+arch=("any")
+url="http://localhost/"
+license=("Other")
+depends=(
+  "abs"
+  "arch-install-scripts"
+  "autostart"
+  "bash-completion"
+  "btrfs-completion"
+  "btrfs-progs"
+  "cpio"
+  "cronie"
+  "dosfstools"
+  "elinks"
+  "ethtool"
+  "f2fs-tools"
+  "gptfdisk"
+  "haveged"
+  "hd-idle"
+  "isl"
+  "mc"
+  "ncftp"
+  "net-tools"
+  "ntfs-3g"
+  "openssh"
+  "p7zip"
+  "pkgfile"
+  "unrar"
+  "screen"
+  "unzip"
+  "vi-vim-symlink"
+  "vim"
+  "wget"
+  "wput"
+  "yaourt"
+  "zip"
+)
+#"oh-my-zsh-git"
+#"zsh"
+#"zsh-completions"
+#"zsh-syntax-highlighting"
+
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)" 
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
+
+package() {
+  echo > /dev/null
+}
+
+# vim:set ts=2 sw=2 et:

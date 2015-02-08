@@ -1,0 +1,53 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("qemu-i386-linux-user")
+pkgver=2.2.0
+pkgrel=1
+pkgdesc="A generic and open source processor emulator which achieves a good emulation speed by using dynamic translation."
+arch=("armv7h")
+url="http://wiki.qemu.org/Main_Page"
+license=("GPL")
+makedepends=("python2")
+options=("!strip")
+source=("http://wiki.qemu-project.org/download/qemu-${pkgver}.tar.bz2"
+  "bios.bin.gz::http://code.coreboot.org/p/seabios/downloads/get/bios.bin-1.7.5.gz"
+  "seabios.deb::http://ftp.kr.debian.org/debian/pool/main/s/sgabios/sgabios_0.0~svn8-3_all.deb")
+noextract=("sgabios.deb")
+md5sums=("SKIP"
+  "SKIP"
+  "SKIP")
+
+prepare() {
+  rm -rf "${srcdir}"/sgabios
+  mkdir -p "${srcdir}"/sgabios
+  cd "${srcdir}"/sgabios
+  tar xf "${srcdir}"/data.tar.xz
+}
+
+build() {
+	cd "${srcdir}"/qemu-"${pkgver}"
+  ./configure \
+    --prefix=/usr \
+    --target-list="i386-linux-user" \
+    --disable-tools \
+    --disable-guest-agent \
+    --disable-docs \
+    --disable-system \
+    --disable-linux-aio \
+    --disable-fdt \
+    --disable-sdl \
+    --enable-linux-user \
+    --python=/usr/bin/python2
+  make
+}
+
+package() {
+	cd "${srcdir}"/qemu-"${pkgver}"
+  make DESTDIR="${pkgdir}"/ install
+
+  install -dm755  "${pkgdir}"/usr/share/qemu
+  install -Dm644  "${srcdir}"/bios.bin "${pkgdir}"/usr/share/qemu/bios.bin
+  install -Dm644  "${srcdir}"/sgabios/usr/share/misc/sgabios.bin "${pkgdir}"/usr/share/qemu/sgabios.bin
+}
+
+# vim:set ts=2 sw=2 et:

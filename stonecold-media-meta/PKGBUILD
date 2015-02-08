@@ -1,0 +1,41 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("stonecold-media-meta")
+pkgver=20150206.1
+pkgrel=1
+pkgdesc="Install media packages"
+arch=("any")
+url="http://localhost/"
+license=("Other")
+depends=(
+  "minidlna"
+  "mkvtoolnix-cli"
+  "transmission-cli"
+  "tvheadend"
+  "tvheadend-extra"
+)
+
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
+
+package() {
+  echo > /dev/null
+}
+
+# vim:set ts=2 sw=2 et:

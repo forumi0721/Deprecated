@@ -1,0 +1,45 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("autostart")
+pkgver=20150206.1
+pkgrel=1
+pkgdesc="Autostart script service"
+arch=("any")
+license=("LGPL")
+depends=("sh" "findutils")
+install="${pkgname}.install"
+source=("autostart.service"
+	"autostart.sh")
+md5sums=("SKIP"
+	"SKIP")
+
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
+
+package() {
+	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+	install -Dm0644 "${srcdir}"/autostart.service "${pkgdir}"/usr/lib/systemd/system/
+
+	install -dm0755 "${pkgdir}"/usr/bin
+	install -Dm0755 "${srcdir}"/autostart.sh "${pkgdir}"/usr/bin/
+
+	install -dm0755 "${pkgdir}"/etc/autostart.d
+}
+
+# vim:set ts=2 sw=2 et:

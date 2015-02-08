@@ -1,0 +1,38 @@
+# Maintainer: Bjoern Franke <bjo@nord-west.org>
+
+pkgname=tvheadend
+
+pkgver=3.4.27
+pkgrel=2
+pkgdesc="TV streaming server for Linux"
+arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+url="https://tvheadend.org/projects/tvheadend"
+license=('GPL3')
+depends=('avahi' 'openssl' 'python2')
+makedepends=('git')
+optdepends=('xmltv: For an alternative source of programme listings')
+provides=('tvheadend')
+conflicts=('tvheadend' 'hts-tvheadend' 'hts-tvheadend-svn' 'hts-tvheadend-git' 'tvheadend-git')
+backup=('etc/conf.d/tvheadend')
+install=tvheadend.install
+
+source=("https://github.com/tvheadend/tvheadend/archive/3.4patch1.tar.gz" 
+	'tvheadend.service')
+
+md5sums=('86d1be0ad6e02bd2aecd3d529a026797'
+         'b546f4486f0d28bea13ad1fb676acb27')
+
+
+build() {
+
+    msg "Starting make..."
+    cd ${srcdir}/${pkgname}-3.4patch1
+    ./configure --prefix=/usr --mandir=/usr/share/man/man1 --python=python2 --release
+    make
+}
+
+package() {
+    cd ${srcdir}/${pkgname}-3.4patch1
+    make DESTDIR="$pkgdir/" install
+    install -D -m 644 "$srcdir/tvheadend.service" "$pkgdir/usr/lib/systemd/system/tvheadend.service"
+}

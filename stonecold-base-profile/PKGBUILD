@@ -1,0 +1,51 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("stonecold-base-profile")
+pkgver=20150206.1
+pkgrel=1
+pkgdesc="Install base profile packages"
+arch=("any")
+url="http://localhost/"
+license=("Other")
+depends=(
+  "bash"
+  "sudo"
+)
+install="${pkgname}.install"
+source=(
+  "bash.bashrc2"
+  "sudoers"
+)
+md5sums=(
+  "SKIP"
+  "SKIP"
+)
+
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
+
+package() {
+  install -dm755 "${pkgdir}"/etc/
+  install -Dm644 "${srcdir}"/bash.bashrc2 "${pkgdir}"/etc/
+
+  install -dm750 "${pkgdir}"/etc/sudoers.d
+  install -Dm644 "${srcdir}"/sudoers "${pkgdir}"/etc/sudoers.d/
+}
+
+# vim:set ts=2 sw=2 et:

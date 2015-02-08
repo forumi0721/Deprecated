@@ -1,0 +1,37 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("vmware-tools-service")
+pkgver=20150206.1
+pkgrel=1
+pkgdesc="VMWare tools systemd service"
+arch=("x86_64")
+license=("LGPL")
+install="${pkgname}.install"
+source=("vmware-tools.service")
+md5sums=("SKIP")
+
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
+
+package() {
+	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+	install -Dm0644 "${srcdir}"/vmware-tools.service "${pkgdir}"/usr/lib/systemd/system/
+}
+
+# vim:set ts=2 sw=2 et:
