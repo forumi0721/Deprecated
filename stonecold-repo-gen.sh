@@ -12,6 +12,14 @@ RSYNC_ID=forumi0721
 RSYNC_SVR=192.168.0.21
 RSYNC_PATH=/mnt/VOL1/nas_htdocs/arch/stonecold
 
+if [ "${1}" = "--sync" ] && [ -e "${LOCAL_REPO}" ]; then
+	echo "rsync start..."
+	rsync -avrh --progress ${LOCAL_REPO}/* ${RSYNC_ID}@${RSYNC_SVR}:${RSYNC_PATH}
+	echo "Done"
+	echo
+	exit 0
+fi
+
 rm -rf "${LOCAL_REPO}"
 for arch in ${TARGET_ARCH[@]}
 do
