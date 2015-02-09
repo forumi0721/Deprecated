@@ -28,6 +28,9 @@ post_install() {
 	ln -s ../usr/share/zoneinfo/Asia/Seoul localtime
 	popd &> /dev/null
 
+	sed -i "s/^START_HD_IDLE=false/START_HD_IDLE=true/g" /etc/conf.d/hd-idle
+	sed -i "s/^#HD_IDLE_OPTS=\"-i 180 -l \/var\/log\/hd-idle.log\"/HD_IDLE_OPTS=\"-i 1800 -l \/var\/log\/hd-idle.log\"/g" /etc/conf.d/hd-idle
+
 	locale-gen
 }
 
@@ -53,4 +56,6 @@ post_remove() {
 	done
 	sed -i "s/^startup_message off/#startup_message off/g" /etc/screenrc
 	sed -i "s/^TMPDIR=\"\/var\/tmp\"/#TMPDIR=\"\/tmp\"/g" /etc/yaourtrc
+	sed -i "s/^START_HD_IDLE=true/START_HD_IDLE=false/g" /etc/conf.d/hd-idle
+	sed -i "s/^HD_IDLE_OPTS=\"-i 1800 -l \/var\/log\/hd-idle.log\"/#HD_IDLE_OPTS=\"-i 180 -l \/var\/log\/hd-idle.log\"/g" /etc/conf.d/hd-idle
 }

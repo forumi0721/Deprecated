@@ -4,7 +4,7 @@ pkgname=("stonecold-xorg-meta")
 pkgver=20150208.1
 pkgrel=1
 pkgdesc="Install xorg packages"
-arch=("any")
+arch=("x86_64" "armv7h")
 url="http://localhost/"
 license=("Other")
 depends=(
@@ -15,13 +15,25 @@ depends=(
   "lightdm"
   "lightdm-gtk3-greeter"
   "tango-icon-theme"
-  "thunar-trash"
   "tigervnc"
   "ttf-bitstream-vera-sans-mono"
   "ttf-nanum-fonts"
   "ttf-win81-fonts-korean"
   "wxgtk2.8"
 )
+depends+=(
+  "chromium"
+  "gimp"
+  "libreoffice-fresh"
+  "libreoffice-fresh-ko"
+  "gvim"
+  "nabi"
+  "sylpheed"
+)
+depends_x86_64+=(
+  "chromium-pepper-flash"
+)
+
 
 pkgver() {
   local ldate="$(date +'%Y%m%d')"
