@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-meta")
-pkgver=20150206.1
+pkgver=20150209.4
 pkgrel=1
 pkgdesc="Install base packages"
 arch=("any")
@@ -21,9 +21,7 @@ depends=(
   "ethtool"
   "f2fs-tools"
   "gptfdisk"
-  "haveged"
   "hd-idle"
-  "isl"
   "mc"
   "ncftp"
   "net-tools"
@@ -31,8 +29,9 @@ depends=(
   "openssh"
   "p7zip"
   "pkgfile"
-  "unrar"
   "screen"
+  "sudo"
+  "unrar"
   "unzip"
   "vi-vim-symlink"
   "vim"
@@ -41,10 +40,15 @@ depends=(
   "yaourt"
   "zip"
 )
-#"oh-my-zsh-git"
-#"zsh"
-#"zsh-completions"
-#"zsh-syntax-highlighting"
+#"haveged"
+#"isl"
+install="${pkgname}.install"
+source=(
+  "etc.zip"
+)
+md5sums=(
+  "SKIP"
+)
 
 pkgver() {
   local ldate="$(date +'%Y%m%d')"
@@ -56,7 +60,7 @@ pkgver() {
   fi
   for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
   do
-    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)" 
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
     if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
       lrevision=${lrevision2}
     fi
@@ -66,7 +70,23 @@ pkgver() {
 }
 
 package() {
-  echo > /dev/null
+  install -dm755 "${pkgdir}"/etc/
+  install -Dm644 "${srcdir}"/etc/bash.bashrc2 "${pkgdir}"/etc/
+  install -Dm644 "${srcdir}"/etc/locale.conf "${pkgdir}"/etc/
+  install -dm755 "${pkgdir}"/etc/ssh
+  install -Dm600 "${srcdir}"/etc/ssh/ssh_host_dsa_key "${pkgdir}"/etc/ssh/
+  install -Dm644 "${srcdir}"/etc/ssh/ssh_host_dsa_key.pub "${pkgdir}"/etc/ssh/
+  install -Dm600 "${srcdir}"/etc/ssh/ssh_host_ecdsa_key "${pkgdir}"/etc/ssh/
+  install -Dm644 "${srcdir}"/etc/ssh/ssh_host_ecdsa_key.pub "${pkgdir}"/etc/ssh/
+  install -Dm600 "${srcdir}"/etc/ssh/ssh_host_ed25519_key "${pkgdir}"/etc/ssh/
+  install -Dm644 "${srcdir}"/etc/ssh/ssh_host_ed25519_key.pub "${pkgdir}"/etc/ssh/
+  install -Dm600 "${srcdir}"/etc/ssh/ssh_host_key "${pkgdir}"/etc/ssh/
+  install -Dm644 "${srcdir}"/etc/ssh/ssh_host_key.pub "${pkgdir}"/etc/ssh/
+  install -Dm600 "${srcdir}"/etc/ssh/ssh_host_rsa_key "${pkgdir}"/etc/ssh/
+  install -Dm644 "${srcdir}"/etc/ssh/ssh_host_rsa_key.pub "${pkgdir}"/etc/ssh/
+  install -dm750 "${pkgdir}"/etc/sudoers.d
+  install -Dm644 "${srcdir}"/etc/sudoers.d/sudoers "${pkgdir}"/etc/sudoers.d/
+  install -Dm644 "${srcdir}"/etc/vimrc2 "${pkgdir}"/etc/
 }
 
 # vim:set ts=2 sw=2 et:

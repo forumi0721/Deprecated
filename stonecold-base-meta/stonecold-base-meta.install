@@ -1,0 +1,56 @@
+pre_install() {
+	rm -rf /etc/ssh/ssh_host*
+	post_remove
+}
+
+post_install() {
+	if [ -z "$(grep "bash.bashrc2" /etc/bash.bashrc)" ]; then
+		echo "[ -r /etc/bash.bashrc2  ] && . /etc/bash.bashrc2" >> /etc/bash.bashrc
+	fi
+	sed -i "s/^\(alias .*\)$/#\1/g" /etc/skel/.bashrc
+	sed -i "s/^\(PS1=.*\)$/#\1/g" /etc/skel/.bashrc
+	sed -i "s/^\(alias .*\)$/#\1/g" /root/.bashrc
+	sed -i "s/^\(PS1=.*\)$/#\1/g" /root/.bashrc
+	for dir in $(find /home -mindepth 1 -maxdepth 1 -type d)
+	do
+		sed -i "s/^\(alias .*\)$/#\1/g" ${dir}/.bashrc
+		sed -i "s/^\(PS1=.*\)$/#\1/g" ${dir}/.bashrc
+	done
+	sed -i "s/^#ko_KR.UTF-8 UTF-8/ko_KR.UTF-8 UTF-8/g" /etc/locale.gen
+	if [ -z "$(grep "vimrc2" /etc/vimrc)" ]; then
+		echo "source /etc/vimrc2" >> /etc/vimrc
+	fi
+	sed -i "s/^#startup_message off/startup_message off/g" /etc/screenrc
+	sed -i "s/^#TMPDIR=\"\/tmp\"/TMPDIR=\"\/var\/tmp\"/g" /etc/yaourtrc
+	rm -rf /etc/localtime
+	pushd . &> /dev/null
+	cd /etc
+	ln -s ../usr/share/zoneinfo/Asia/Seoul localtime
+	popd &> /dev/null
+
+	locale-gen
+}
+
+pre_upgrade() {
+	pre_install
+}
+
+post_upgrade() {
+	post_install
+}
+
+post_remove() {
+	sed -i '/bash.bashrc2/d' /etc/bash.bashrc
+	sed -i '/vimrc2/d' /etc/vimrc
+	sed -i "s/^#\(alias .*\)$/\1/g" /etc/skel/.bashrc
+	sed -i "s/^#\(PS1=.*\)$/\1/g" /etc/skel/.bashrc
+	sed -i "s/^#\(alias .*\)$/\1/g" /root/.bashrc
+	sed -i "s/^#\(PS1=.*\)$/\1/g" /root/.bashrc
+	for dir in $(find /home -mindepth 1 -maxdepth 1 -type d)
+	do
+		sed -i "s/^#\(alias .*\)$/\1/g" ${dir}/.bashrc
+		sed -i "s/^#\(PS1=.*\)$/\1/g" ${dir}/.bashrc
+	done
+	sed -i "s/^startup_message off/#startup_message off/g" /etc/screenrc
+	sed -i "s/^TMPDIR=\"\/var\/tmp\"/#TMPDIR=\"\/tmp\"/g" /etc/yaourtrc
+}
