@@ -3,7 +3,7 @@
 pkgname=("wiringbp-bpi-git" "wiringbp-bpro-git")
 _gitname_pi="bananapi"
 _gitname_pro="bananapro"
-pkgver=4+g2e505b3+7+g010ecba
+pkgver=5+g18d509d+10+g941aaa1
 pkgrel=1
 pkgdesc="WiringBP: An implementation of most of the Arduino Wiring functions for the Banana Pi"
 arch=("armv7h")
@@ -54,13 +54,13 @@ package_common(){
 	install -Dm0644 "${srcdir}"/"${1}"/gpio/gpio.1 "${pkgdir}"/usr/share/man/man1/
 }
 
-package_wiringbp-bpi-git(){
+package_wiringbp-bpi-git() {
   prepare_common "${_gitname_pi}"
   build_common "${_gitname_pi}"
   package_common "${_gitname_pi}"
 }
 
-package_wiringbp-bpro-git(){
+package_wiringbp-bpro-git() {
   prepare_common "${_gitname_pi}"
   build_common "${_gitname_pro}"
   package_common "${_gitname_pro}"

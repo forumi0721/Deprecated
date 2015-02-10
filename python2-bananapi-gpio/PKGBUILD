@@ -2,7 +2,7 @@
 
 pkgname=("python2-bananapi-gpio")
 _gitname="python2-bananapi-gpio"
-pkgver=3+g7f824e8
+pkgver=11+g57f3a12
 pkgrel=1
 pkgdesc="Python library for GPIO access on a Banana Pi"
 arch=("any")

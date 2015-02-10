@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-bananapi-meta")
-pkgver=20150115
+pkgver=20150210.1
 pkgrel=1
 pkgdesc="Install BananaPi packages"
 arch=("armv7h")
@@ -12,6 +12,10 @@ depends=(
   "linux-bananapi-headers"
   "uboot-bananapi"
   "sunxi-tools"
+  "bpi-led-off"
+  "python-bananapi-gpio"
+  "python2-bananapi-gpio"
+  "wiringbp-bpi-git"
 )
 
 pkgver() {

@@ -4,7 +4,7 @@ buildarch=4
 
 pkgbase="BananaPi"
 pkgname=("uboot-bananapi" "linux-bananapi" "linux-bananapi-headers")
-pkgver=20150119.1
+pkgver=20150210.1
 pkgrel=1
 arch=("armv7h")
 url="https://github.com/LeMaker/lemaker-bsp"
@@ -61,7 +61,8 @@ package_linux-bananapi() {
 	_k_version=$(ls "${srcdir}"/rootfs/lib/modules/)
 
 	pkgdesc="The Linux Kernel and modules - ${basename}"
-	depends=("coreutils" "linux-firmware" "kmod" "mkinitcpio>=0.7")
+	#depends=("coreutils" "linux-firmware" "kmod" "mkinitcpio>=0.7")
+  depends=("coreutils" "linux-firmware" "kmod")
 	optdepends=("crda: to set the correct wireless channels of your country")
 	provides=("linux-sun7i" "kernel26" "linux=${_k_version}" "aufs_friendly")
 	conflicts=("linux-sun7i" "linux-omap" "linux-imx6" "linux-armada370")

@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("wt-rpm")
-pkgver=20150118.1
+pkgver=20150210.1
 pkgrel=1
 pkgdesc="Remote Power Managemant"
 arch=("armv6h" "armv7h")
