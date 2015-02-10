@@ -1,40 +1,13 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-devel-meta")
-pkgver=20150210.1
+pkgver=20150210.3
 pkgrel=1
 pkgdesc="Install base-devel packages"
 arch=("any")
 url="http://localhost/"
 license=("Other")
-dpends=(
-  "autoconf"
-  "automake"
-  "binutils"
-  "bison"
-  "fakeroot"
-  "file"
-  "findutils"
-  "flex"
-  "gawk"
-  "gcc"
-  "gettext"
-  "grep"
-  "groff"
-  "gzip"
-  "libtool"
-  "m4"
-  "make"
-  "pacman"
-  "patch"
-  "pkg-config"
-  "sed"
-  "sudo"
-  "texinfo"
-  "util-linux"
-  "which"
-)
-depends+=(
+depends=(
   "bashdb"
   "ccache"
   "cscope"
