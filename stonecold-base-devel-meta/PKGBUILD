@@ -1,13 +1,40 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-devel-meta")
-pkgver=20150209.1
+pkgver=20150210.1
 pkgrel=1
 pkgdesc="Install base-devel packages"
 arch=("any")
 url="http://localhost/"
 license=("Other")
-depends=(
+dpends=(
+  "autoconf"
+  "automake"
+  "binutils"
+  "bison"
+  "fakeroot"
+  "file"
+  "findutils"
+  "flex"
+  "gawk"
+  "gcc"
+  "gettext"
+  "grep"
+  "groff"
+  "gzip"
+  "libtool"
+  "m4"
+  "make"
+  "pacman"
+  "patch"
+  "pkg-config"
+  "sed"
+  "sudo"
+  "texinfo"
+  "util-linux"
+  "which"
+)
+depends+=(
   "bashdb"
   "ccache"
   "cscope"
@@ -18,7 +45,6 @@ depends=(
   "strace"
   "subversion"
 )
-#"zshdb"
 
 pkgver() {
   local ldate="$(date +'%Y%m%d')"
