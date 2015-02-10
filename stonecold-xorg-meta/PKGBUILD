@@ -26,6 +26,7 @@ depends+=(
   "gimp"
   "gvim"
   "kodi"
+  "kodi-pvr-addons"
   "libreoffice-fresh"
   "libreoffice-fresh-ko"
   "nabi"
