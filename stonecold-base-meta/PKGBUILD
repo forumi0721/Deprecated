@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-meta")
-pkgver=20150210.1
+pkgver=20150210.2
 pkgrel=1
 pkgdesc="Install base packages"
 arch=("any")
