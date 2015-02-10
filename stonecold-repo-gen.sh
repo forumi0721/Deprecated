@@ -61,8 +61,8 @@ if [ -z "$(which rsync)" ]; then
 fi
 
 
-echo "rsync start..."
-rsync -avrh --progress ${LOCAL_REPO}/* ${RSYNC_ID}@${RSYNC_SVR}:${RSYNC_PATH}
-echo "Done"
-echo
+#echo "rsync start..."
+#rsync -avrh --progress ${LOCAL_REPO}/* ${RSYNC_ID}@${RSYNC_SVR}:${RSYNC_PATH}
+#echo "Done"
+#echo
 
