@@ -1,17 +1,25 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("tvheadend-extra")
-pkgver=20150206.1
+pkgver=20150210.1
 pkgrel=1
 pkgdesc="tvheadend extra EPG and frequencies"
 arch=("any")
 url="https://tvheadend.org/"
 license=("custom")
-depends=("tvheadend")
-source=("kr-Cable-C&M-center-frequencies-QAM256_8VSB"
-  "tv_grab_kr_epg")
-md5sums=("SKIP"
-  "SKIP")
+depends=(
+  "tvheadend"
+  "mc2xml"
+  "ncftp"
+)
+source=(
+  "tv_grab_kr_epg"
+  "kr-Cable-C&M-center-frequencies-QAM256_8VSB"
+)
+md5sums=(
+  "SKIP"
+  "SKIP"
+)
 
 pkgver() {
   local ldate="$(date +'%Y%m%d')"
