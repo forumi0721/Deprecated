@@ -1,0 +1,55 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("wiringbp-bpi-git")
+_gitname="bananapi"
+pkgver=5+g18d509d
+pkgrel=1
+pkgdesc="WiringBP: An implementation of most of the Arduino Wiring functions for the Banana Pi"
+arch=("armv7h")
+url="https://github.com/LeMaker/WiringBP/"
+license=("LGPL")
+makedepends=("git")
+provides=("wiringpi") 
+conflicts=("wiringpi")
+source=(
+  "${_gitname}::git+https://github.com/LeMaker/WiringBP#branch=${_gitname}"
+)
+md5sums=(
+  "SKIP"
+)
+
+pkgver() {
+	cd "${srcdir}/${_gitname}"
+  echo $(git rev-list --count HEAD)+g$(git rev-parse --short HEAD)
+}
+
+prepare() {
+	cd "${srcdir}/${_gitname}"
+	sed -i "s|/usr/local/bin/gpio|/usr/bin/gpio|" wiringPi/wiringPi.c
+}
+
+build() {
+	cd "${srcdir}/${_gitname}"
+	make -C wiringPi all static
+	make -C devLib all static INCLUDE+="-I${srcdir}/${_gitname}/wiringPi" LDFLAGS+="-L${srcdir}/${_gitname}/wiringPi"
+	make -C gpio INCLUDE+="-I${srcdir}/${_gitname}/wiringPi -I${srcdir}/${_gitname}/devLib" LDFLAGS+="-L${srcdir}/${_gitname}/wiringPi -L${srcdir}/${_gitname}/devLib"
+}
+
+package() {
+	install -dm0755 "${pkgdir}"/usr/include
+	install -Dm0644 "${srcdir}"/"${_gitname}"/wiringPi/*.h "${pkgdir}"/usr/include/
+	install -dm0755 "${pkgdir}"/usr/lib
+	install -Dm0644 "${srcdir}"/"${_gitname}"/wiringPi/libwiringPi.{a,so*} "${pkgdir}"/usr/lib/
+	
+	install -dm0755 "${pkgdir}"/usr/include
+	install -Dm0644 "${srcdir}"/"${_gitname}"/devLib/*.h "${pkgdir}"/usr/include/
+	install -dm0755 "${pkgdir}"/usr/lib
+	install -Dm0644 "${srcdir}"/"${_gitname}"/devLib/libwiringPiDev.{a,so*} "${pkgdir}"/usr/lib
+	
+	install -dm0755 "${pkgdir}"/usr/bin
+	install -Dm4755 "${srcdir}"/"${_gitname}"/gpio/gpio "${pkgdir}"/usr/bin/
+	install -dm0755 "${pkgdir}"/usr/share/man/man1
+	install -Dm0644 "${srcdir}"/"${_gitname}"/gpio/gpio.1 "${pkgdir}"/usr/share/man/man1/
+}
+
+# vim:set ts=2 sw=2 et:
