@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-xorg-meta")
-pkgver=20150210.2
+pkgver=20150211.1
 pkgrel=1
 pkgdesc="Install xorg packages"
 arch=("x86_64" "armv7h")
