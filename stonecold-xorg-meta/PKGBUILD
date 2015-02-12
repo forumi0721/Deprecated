@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-xorg-meta")
-pkgver=20150212.1
+pkgver=20150212.2
 pkgrel=1
 pkgdesc="Install xorg packages"
 arch=("x86_64" "armv7h")
@@ -36,7 +36,10 @@ depends+=(
 )
 depends_x86_64+=(
   "chromium-pepper-flash"
+)
+depends_x86_64+=(
   "libva-intel-driver"
+  "libvdpau-va-gl"
 )
 install="${pkgname}.install"
 source=(
@@ -81,7 +84,8 @@ package() {
     install -dm755 "${pkgdir}"/etc/modprobe.d
     install -Dm644 "${srcdir}"/etc/modprobe.d/i915.conf "${pkgdir}"/etc/modprobe.d/
     install -dm755 "${pkgdir}"/etc/profile.d
-    install -Dm755 "${srcdir}"/etc/profile.d/vdpau.sh "${pkgdir}"/etc/profile.d/
+    install -Dm755 "${srcdir}"/etc/profile.d/libva_driver_name.sh "${pkgdir}"/etc/profile.d/
+    install -Dm755 "${srcdir}"/etc/profile.d/vdpau_driver.sh "${pkgdir}"/etc/profile.d/
     install -dm755 "${pkgdir}"/etc/X11/xorg.conf.d
     install -Dm644 "${srcdir}"/etc/X11/xorg.conf.d/20-intel.conf "${pkgdir}"/etc/X11/xorg.conf.d/
   fi
