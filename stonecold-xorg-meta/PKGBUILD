@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-xorg-meta")
-pkgver=20150213.1
+pkgver=20150214.1
 pkgrel=1
 pkgdesc="Install xorg packages"
 arch=("x86_64" "armv7h")
@@ -31,15 +31,10 @@ depends+=(
   "libreoffice-fresh-ko"
   "nabi-git"
   "sylpheed"
-  "vlc"
-  "vlc-htsp-plugin-git"
 )
 depends_x86_64+=(
   "chromium-pepper-flash"
-)
-depends_x86_64+=(
   "libva-intel-driver"
-  "libvdpau-va-gl"
 )
 install="${pkgname}.install"
 source=(
