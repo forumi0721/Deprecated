@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-devel-android-meta")
-pkgver=20150208.1
+pkgver=20150213.3
 pkgrel=1
 pkgdesc="Install android packages"
 arch=("x86_64")
@@ -37,11 +37,22 @@ depends+=(
   "android-apktool"
   "android-ndk"
   "android-sdk"
+  "android-auto-api-simulators"
+  "android-google-play-apk-expansion"
+  "android-google-play-billing"
+  "android-google-play-licensing"
+  "android-google-play-services"
+  "android-google-play-services-froyo"
+  "android-google-repository"
+  "android-google-webdriver"
   "android-sdk-build-tools"
   "android-sdk-platform-tools"
+  "android-support"
+  "android-support-repository"
   "pngcrush"
   "repo"
 )
+install="${pkgname}.install"
 
 pkgver() {
   local ldate="$(date +'%Y%m%d')"
