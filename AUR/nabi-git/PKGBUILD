@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("nabi-git")
-pkgver=786+gf3276ce
+pkgver=r786.f3276ce
 pkgrel=1
 pkgdesc="Nabi - The Easy Hangul XIM"
 arch=("i686" "x86_64" "armv7h")
@@ -15,7 +15,7 @@ md5sums=("SKIP")
 
 pkgver() {
   cd "${srcdir}/${pkgname}"
-  echo $(git rev-list --count HEAD)+g$(git rev-parse --short HEAD)
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 prepare() {
