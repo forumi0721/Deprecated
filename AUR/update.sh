@@ -146,7 +146,7 @@ function ProcessPkgVer {
 	unset -f pkgver
 	. ./PKGBUILD
 	if [ ! -z "$(declare -f pkgver)" ]; then
-		echo "Process makpkg..."
+		echo "Process makepkg..."
 		makepkg --nobuild -Acdf &> /dev/null
 		echo "Done"
 	fi

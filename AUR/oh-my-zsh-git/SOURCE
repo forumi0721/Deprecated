@@ -1,5 +1,0 @@
-#!/bin/sh
-
-SOURCETYPE="AUR"
-SOURCEPATH="https://aur.archlinux.org/packages/oh/oh-my-zsh-git/oh-my-zsh-git.tar.gz"
-
