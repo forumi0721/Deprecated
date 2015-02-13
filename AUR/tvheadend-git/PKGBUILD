@@ -5,7 +5,7 @@
 
 pkgname=tvheadend-git
 _gitname='tvheadend-git'
-pkgver=6015+g4a9dfec
+pkgver=6025+gd386ed0
 pkgrel=1
 pkgdesc="TV streaming server for Linux"
 arch=('i686' 'x86_64' 'armv7h')

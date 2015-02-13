@@ -174,7 +174,7 @@ function GetNewVersion {
 }
 
 UPDATE_LIST=
-for src in $(find . -name SOURCE)
+for src in $(find . -name SOURCE | sort)
 do
 	CheckVersion "${src}"
 	if [ "$?" = "2" ]; then
