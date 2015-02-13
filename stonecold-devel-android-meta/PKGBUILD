@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-devel-android-meta")
-pkgver=20150213.3
+pkgver=20150213.4
 pkgrel=1
 pkgdesc="Install android packages"
 arch=("x86_64")
@@ -49,6 +49,7 @@ depends+=(
   "android-sdk-platform-tools"
   "android-support"
   "android-support-repository"
+  "android-studio"
   "pngcrush"
   "repo"
 )
