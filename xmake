@@ -5,8 +5,7 @@ if [ ! -e chosen_board.mk ]; then
 	./configure BananaPi
 	make -C sunxi-tools
 fi
-PATH=`pwd`/../arm-bpi-linux-gnueabihf/bin:$PATH
-CROSS_COMPILE=arm-bpi-linux-gnueabihf-
+CROSS_COMPILE=arm-linux-gnueabihf-
 CC=${CROSS_COMPILE}gcc
 CXX=${CROSS_COMPILE}g++
 ccache -V &> /dev/null
