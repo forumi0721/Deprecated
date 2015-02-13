@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-xorg-meta")
-pkgver=20150212.5
+pkgver=20150213.1
 pkgrel=1
 pkgdesc="Install xorg packages"
 arch=("x86_64" "armv7h")
@@ -29,7 +29,7 @@ depends+=(
   "kodi-pvr-addons"
   "libreoffice-fresh"
   "libreoffice-fresh-ko"
-  "nabi"
+  "nabi-git"
   "sylpheed"
   "vlc"
   "vlc-htsp-plugin-git"

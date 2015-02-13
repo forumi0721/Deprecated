@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-media-meta")
-pkgver=20150209.1
+pkgver=20150213.1
 pkgrel=1
 pkgdesc="Install media packages"
 arch=("any")
@@ -11,7 +11,7 @@ depends=(
   "minidlna"
   "mkvtoolnix-cli"
   "transmission-cli"
-  "tvheadend-git"
+  "tvheadend"
   "tvheadend-extra"
 )
 
