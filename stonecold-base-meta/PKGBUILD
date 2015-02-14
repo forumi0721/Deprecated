@@ -1,7 +1,7 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-meta")
-pkgver=20150214.2
+pkgver=20150215.1
 pkgrel=1
 pkgdesc="Install base packages"
 arch=("any")
@@ -15,6 +15,7 @@ depends=(
   "bash-completion"
   "btrfs-completion"
   "btrfs-progs"
+  "cifs-utils"
   "cpio"
   "cpupower"
   "cronie"
