@@ -31,7 +31,9 @@ post_install() {
 	sed -i "s/^START_HD_IDLE=false/START_HD_IDLE=true/g" /etc/conf.d/hd-idle
 	sed -i "s/^#HD_IDLE_OPTS=\"-i 180 -l \/var\/log\/hd-idle.log\"/HD_IDLE_OPTS=\"-i 1800 -l \/var\/log\/hd-idle.log\"/g" /etc/conf.d/hd-idle
 
-	sed -i "s/^SHELL=\/bin\/sh unshare --fork --pid chroot \"\$chrootdir\" \"\$@\"/^SHELL=\/bin\/sh unshare --fork chroot \"\$chrootdir\" \"\$@\"/g" /usr/bin/arch-chroot
+	if [ ! -z "$(uname -m | grep arm)" ]; then
+		sed -i "s/^SHELL=\/bin\/sh unshare --fork --pid chroot \"\$chrootdir\" \"\$@\"/SHELL=\/bin\/sh unshare --fork chroot \"\$chrootdir\" \"\$@\"/g" /usr/bin/arch-chroot
+	fi
 
 	locale-gen
 }
@@ -60,5 +62,7 @@ post_remove() {
 	sed -i "s/^TMPDIR=\"\/var\/tmp\"/#TMPDIR=\"\/tmp\"/g" /etc/yaourtrc
 	sed -i "s/^START_HD_IDLE=true/START_HD_IDLE=false/g" /etc/conf.d/hd-idle
 	sed -i "s/^HD_IDLE_OPTS=\"-i 1800 -l \/var\/log\/hd-idle.log\"/#HD_IDLE_OPTS=\"-i 180 -l \/var\/log\/hd-idle.log\"/g" /etc/conf.d/hd-idle
-	sed -i "s/^SHELL=\/bin\/sh unshare --fork chroot \"\$chrootdir\" \"\$@\"/^SHELL=\/bin\/sh unshare --fork --pid chroot \"\$chrootdir\" \"\$@\"/g" /usr/bin/arch-chroot
+	if [ ! -z "$(uname -m | grep arm)" ]; then
+		sed -i "s/^SHELL=\/bin\/sh unshare --fork chroot \"\$chrootdir\" \"\$@\"/SHELL=\/bin\/sh unshare --fork --pid chroot \"\$chrootdir\" \"\$@\"/g" /usr/bin/arch-chroot
+	fi
 }
