@@ -1,5 +1,5 @@
 #!/bin/sh
 
 SOURCETYPE="AUR"
-SOURCEPATH="https://aur.archlinux.org/packages/qe/qemu-i386-linux-user/qemu-i386-linux-user.tar.gz"
+SOURCEPATH="https://aur.archlinux.org/packages/na/nabi-git/nabi-git.tar.gz"
 
