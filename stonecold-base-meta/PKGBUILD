@@ -1,14 +1,13 @@
 # Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
 
 pkgname=("stonecold-base-meta")
-pkgver=20150215.1
+pkgver=20150215.2
 pkgrel=1
 pkgdesc="Install base packages"
 arch=("any")
 url="http://localhost/"
 license=("Other")
 depends=(
-  "acpid"
   "abs"
   "arch-install-scripts"
   "autostart"
@@ -17,7 +16,6 @@ depends=(
   "btrfs-progs"
   "cifs-utils"
   "cpio"
-  "cpupower"
   "cronie"
   "dosfstools"
   "elinks"
