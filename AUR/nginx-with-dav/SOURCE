@@ -1,0 +1,38 @@
+#!/bin/sh
+
+SOURCETYPE="ABS"
+SOURCEPATH="/var/abs/extra/nginx/"
+
+function GetSourcePatch {
+	if [ -z "$(grep "_pkgname" PKGBUILD)" ]; then
+		sed -i "s/pkgname/_pkgname/g" PKGBUILD
+	fi
+	if [ -z "$(grep "pkgname=nginx-with-dav" PKGBUILD)" ]; then
+		sed -i "s/_pkgname=nginx/_pkgname=nginx\n\
+pkgname=nginx-with-dav/g" PKGBUILD
+	fi
+	if [ -z "$(grep "provides=('nginx')" PKGBUILD)" ]; then
+		sed -i "s/\(backup=(.*\)/conflicts=('nginx' 'nginx-unstable' 'nginx-svn' 'nginx-devel' 'nginx-custom-dev' 'nginx-full')\n\
+provides=('nginx')\n\
+\1/g" PKGBUILD
+	fi
+	if [ -z "$(grep "POP3 proxy server'$/pkgdesc='Lightweight HTTP server and IMAP\/POP3 proxy server with WebDAV missing methods support'" PKGBUILD)" ]; then
+		sed -i "s/^pkgdesc='Lightweight HTTP server and IMAP\/POP3 proxy server'$/pkgdesc='Lightweight HTTP server and IMAP\/POP3 proxy server with WebDAV missing methods support'/g" PKGBUILD
+	fi
+	if [ -z "$(grep "arch=('i686' 'x86_64' 'armv7h')" PKGBUILD)" ]; then
+		sed -i "s/^arch=('i686' 'x86_64')$/arch=('i686' 'x86_64' 'armv7h')/g" PKGBUILD
+	fi
+	if [ -z "$(grep "#makedepends=('hardening-wrapper')" PKGBUILD)" ]; then
+		sed -i "s/^makedepends=('hardening-wrapper')$/#makedepends=('hardening-wrapper')/g" PKGBUILD
+	fi
+	if [ -z "$(grep "https:\/\/github.com\/arut\/nginx-dav-ext-module\/archive\/master.zip" PKGBUILD)" ]; then
+		sed -i "s/^source=(\(.*\)$/source=(\1\n\
+        https:\/\/github.com\/arut\/nginx-dav-ext-module\/archive\/master.zip/g" PKGBUILD
+		sed -i "s/^md5sums=(\(.*\)$/md5sums=(\1\n\
+         'SKIP'/g" PKGBUILD
+		sed -i "s/--with-http_sub_module/--with-http_sub_module\n\
+    --add-module=\${srcdir}\/nginx-dav-ext-module-master/g" PKGBUILD
+		sed -i "s/--with-http_sub_module/--with-http_sub_module \\\/g" PKGBUILD
+	fi
+}
+

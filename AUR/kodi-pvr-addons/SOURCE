@@ -1,0 +1,11 @@
+#!/bin/sh
+
+SOURCETYPE="ABS"
+SOURCEPATH="/var/abs/community/kodi-pvr-addons/"
+
+function GetSourcePatch {
+	if [ -z "$(grep "arch=('i686' 'x86_64' 'armv7h')" PKGBUILD)" ]; then
+		sed -i "s/^arch=('i686' 'x86_64')/arch=('i686' 'x86_64' 'armv7h')/g" PKGBUILD
+	fi
+}
+

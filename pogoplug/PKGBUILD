@@ -1,0 +1,28 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+pkgname=("pogoplug")
+pkgver=3.4.5.1
+pkgrel=1
+pkgdesc="my.pogoplug.com service daemon"
+arch=("arm" "armv6h" "armv7h")
+url="http://my.pogoplug.com"
+license=("Other")
+depends=("net-tools")
+options=("!strip" "staticlibs")
+install="${pkgname}.install"
+source=("${pkgname}-${pkgver}-${pkgrel}-arm.bin.tar.xz::https://dl.dropboxusercontent.com/u/15043728/ArchLinuxArm/my.pogoplug.com/${pkgname}-${pkgver}-${pkgrel}-arm.pkg.tar.xz")
+md5sums=("SKIP")
+
+prepare() {
+  sed 's/^After=network.target$/After=network.target httpd.service/g' -i "${srcdir}"/usr/lib/systemd/system/pogoplug.service
+}
+
+package() {
+	install -dm0755 "${pkgdir}"/usr/local
+	cp -rp "${srcdir}"/usr/local/cloudengines "${pkgdir}"/usr/local/
+
+	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+	install -Dm0644 "${srcdir}"/usr/lib/systemd/system/pogoplug.service "${pkgdir}"/usr/lib/systemd/system/
+}
+
+# vim:set ts=2 sw=2 et:

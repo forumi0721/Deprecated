@@ -1,0 +1,14 @@
+post_install() {
+	echo "To use the autostart service, please run the following command:"
+	echo " # systemctl enable vlmcsd.service"
+}
+
+post_upgrade() {
+	if [ -e /etc/systemd/system/multi-user.target.wants/autostart.service ]; then
+		systemctl daemon-reload
+	fi
+}
+
+post_remove() {
+	rm -rf /etc/systemd/system/multi-user.target.wants/vlmcsd.service
+}
