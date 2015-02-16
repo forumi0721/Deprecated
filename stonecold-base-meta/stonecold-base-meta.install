@@ -11,11 +11,16 @@ post_install() {
 	sed -i "s/^\(PS1=.*\)$/#\1/g" /etc/skel/.bashrc
 	sed -i "s/^\(alias .*\)$/#\1/g" /root/.bashrc
 	sed -i "s/^\(PS1=.*\)$/#\1/g" /root/.bashrc
-	for dir in $(find /home -mindepth 1 -maxdepth 1 -type d)
+	while read pw
 	do
-		sed -i "s/^\(alias .*\)$/#\1/g" ${dir}/.bashrc
-		sed -i "s/^\(PS1=.*\)$/#\1/g" ${dir}/.bashrc
-	done
+		local h="$(echo ${pw} | cut -d ':' -f 6)"
+		if [ "${h}" != "/" ]; then
+			if [ -e "${h}/.bashrc" ]; then
+				sed -i "s/^\(alias .*\)$/#\1/g" ${h}/.bashrc
+				sed -i "s/^\(PS1=.*\)$/#\1/g" ${h}/.bashrc
+			fi
+		fi
+	done < /etc/passwd
 	sed -i "s/^#ko_KR.UTF-8 UTF-8/ko_KR.UTF-8 UTF-8/g" /etc/locale.gen
 	if [ -z "$(grep "vimrc2" /etc/vimrc)" ]; then
 		echo "source /etc/vimrc2" >> /etc/vimrc
@@ -53,11 +58,16 @@ post_remove() {
 	sed -i "s/^#\(PS1=.*\)$/\1/g" /etc/skel/.bashrc
 	sed -i "s/^#\(alias .*\)$/\1/g" /root/.bashrc
 	sed -i "s/^#\(PS1=.*\)$/\1/g" /root/.bashrc
-	for dir in $(find /home -mindepth 1 -maxdepth 1 -type d)
+	while read pw
 	do
-		sed -i "s/^#\(alias .*\)$/\1/g" ${dir}/.bashrc
-		sed -i "s/^#\(PS1=.*\)$/\1/g" ${dir}/.bashrc
-	done
+		local h="$(echo ${pw} | cut -d ':' -f 6)"
+		if [ "${h}" != "/" ]; then
+			if [ -e "${h}/.bashrc" ]; then
+				sed -i "s/^#\(alias .*\)$/\1/g" ${h}/.bashrc
+				sed -i "s/^#\(PS1=.*\)$/\1/g" ${h}/.bashrc
+			fi
+		fi
+	done < /etc/passwd
 	sed -i "s/^startup_message off/#startup_message off/g" /etc/screenrc
 	sed -i "s/^TMPDIR=\"\/var\/tmp\"/#TMPDIR=\"\/tmp\"/g" /etc/yaourtrc
 	sed -i "s/^START_HD_IDLE=true/START_HD_IDLE=false/g" /etc/conf.d/hd-idle
