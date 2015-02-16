@@ -203,6 +203,9 @@ function GetNewVersion {
 UPDATE_LIST=
 for src in $(find . -name PKGBUILD | sort)
 do
+	if [ ! -z "$(echo "${src}" | grep "linux-bananapi")" ]; then
+		continue
+	fi
 	CheckVersion "${src}"
 	if [ "$?" = "2" ]; then
 		UPDATE_LIST+=("${src}")
