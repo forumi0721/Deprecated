@@ -2,9 +2,8 @@
 
 function CheckVersion {
 	local retvalue=
-	local srcfile="${1}"
-	local pkgdir="$(dirname "${srcfile}")"
-	local pkgfile="${pkgdir}/PKGBUILD"
+	local pkgfile="${1}"
+	local pkgdir="$(dirname "${pkgfile}")"
 
 	echo "Package Path : ${pkgdir}"
 
@@ -23,14 +22,22 @@ function CheckVersion {
 	#Import function
 	echo "Import settings..."
 
-	unset SOURCETYPE
-	unset SOURCEPATH
-	unset -f GetSourcePatch
+	local sourcetype=
+	local sourcepath=
 
-	source ${srcfile}
+	if [ -e "${pkgdir}/SOURCE" ]; then
+		unset SOURCETYPE
+		unset SOURCEPATH
+		unset -f GetSourcePatch
 
-	local sourcetype=${SOURCETYPE}
-	local sourcepath=${SOURCEPATH}
+		source "${pkgdir}/SOURCE"
+
+		sourcetype=${SOURCETYPE}
+		sourcepath=${SOURCEPATH}
+	else
+		sourcetype="local"
+		sourcepath="${pkgdir}"
+	fi
 
 	echo "Done"
 
@@ -41,6 +48,7 @@ function CheckVersion {
 	local downloadpath="$(Download "${tempdir}" "${sourcetype}" "${sourcepath}")"
 	if [ "$?" != "0" ]; then
 		echo ${downloadpath}
+		rm -rf "${temp}"
 		return 1
 	fi
 
@@ -56,6 +64,13 @@ function CheckVersion {
 
 	#Check
 	echo "Compare version..."
+
+	if [ ! -z "$(echo "${pkgver2}" | grep "$(date +'%Y%m%d')\.[0-9]\+")" ]; then
+		echo "Date type pkgver"
+		echo
+		rm -rf "${temp}"
+		return 1
+	fi
 
 	if [ "${pkgver1}" = "${pkgver2}" ]; then
 		retvalue=0
@@ -111,9 +126,10 @@ function Download {
 		for cnt in {1..10}
 		do
 			wget "${sourcepath}" -O "${tempdir}/${sourcefile}" &> /dev/null
-			if [ -e "${tempdir}/${sourcefile}" ]; then
+			if [ "$?" = "0" ]; then
 				break;
 			fi
+			rm -rf "${tempdir}/${sourcefile}"
 		done
 		if [ ! -e "${tempdir}/${sourcefile}" ]; then
 			echo "Cannot get source"
@@ -122,6 +138,17 @@ function Download {
 		pushd . &> /dev/null
 		cd "${tempdir}"
 		bsdtar -xf "${tempdir}/${sourcefile}"
+		retvalue=$(ls -d */ | cut -d '/' -f 1)
+		cp -r "${tempdir}/${retvalue}" "${tempdir}/${retvalue}.ORG"
+		popd &> /dev/null
+	elif [ "${sourcetype}" = "local" ]; then
+		if [ ! -e "${sourcepath}" ]; then
+			echo "Cannot find source"
+			return 1
+		fi
+		cp -r "${sourcepath}" "${tempdir}/"
+		pushd . &> /dev/null
+		cd "${tempdir}"
 		retvalue=$(ls -d */ | cut -d '/' -f 1)
 		cp -r "${tempdir}/${retvalue}" "${tempdir}/${retvalue}.ORG"
 		popd &> /dev/null
@@ -174,7 +201,7 @@ function GetNewVersion {
 }
 
 UPDATE_LIST=
-for src in $(find . -name SOURCE | sort)
+for src in $(find . -name PKGBUILD | sort)
 do
 	CheckVersion "${src}"
 	if [ "$?" = "2" ]; then
