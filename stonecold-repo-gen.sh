@@ -8,17 +8,6 @@ fi
 REPO_NAME="StoneCold-BPi"
 LOCAL_REPO="stonecold-repo"
 TARGET_ARCH=("armv7h")
-RSYNC_ID=forumi0721
-RSYNC_SVR=192.168.0.21
-RSYNC_PATH=/mnt/VOL1/nas_htdocs/arch/stonecold-bpi
-
-if [ "${1}" = "--sync" ] && [ -e "${LOCAL_REPO}" ]; then
-	echo "rsync start..."
-	rsync -avrh --progress ${LOCAL_REPO}/* ${RSYNC_ID}@${RSYNC_SVR}:${RSYNC_PATH}
-	echo "Done"
-	echo
-	exit 0
-fi
 
 rm -rf "${LOCAL_REPO}"
 for arch in ${TARGET_ARCH[@]}
@@ -55,14 +44,12 @@ do
 	fi
 done
 
-if [ -z "$(which rsync)" ]; then
-	echo "Cannot found rsync"
-	exit 0
-fi
-
-
-echo "rsync start..."
-rsync -avrh --progress ${LOCAL_REPO}/* ${RSYNC_ID}@${RSYNC_SVR}:${RSYNC_PATH}
-echo "Done"
-echo
+for target in ${TARGET_ARCH[@]}
+do
+	pushd . &> /dev/null
+	cd "${LOCAL_REPO}/${target}"
+	rm -rf ${REPO_NAME}.db.tar.gz.old
+	rm -rf ${REPO_NAME}.files.tar.gz.old
+	popd &> /dev/null
+done
 
