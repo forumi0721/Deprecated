@@ -44,12 +44,12 @@ do
 	fi
 done
 
-pushd . &> /dev/null
 for target in ${TARGET_ARCH[@]}
 do
+	pushd . &> /dev/null
 	cd "${LOCAL_REPO}/${target}"
 	rm -rf ${REPO_NAME}.db.tar.gz.old
 	rm -rf ${REPO_NAME}.files.tar.gz.old
+	popd &> /dev/null
 done
-popd &> /dev/null
 
