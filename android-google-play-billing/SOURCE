@@ -1,0 +1,5 @@
+#!/bin/sh
+
+SOURCETYPE="AUR"
+SOURCEPATH="https://aur.archlinux.org/packages/an/android-google-play-billing/android-google-play-billing.tar.gz"
+

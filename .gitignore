@@ -1,0 +1,4 @@
+stonecold-repo
+android-ndk/*.pkg.tar.*
+android-sdk/*.pkg.tar.*
+android-studio/*.pkg.tar.*

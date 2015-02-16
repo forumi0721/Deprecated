@@ -1,0 +1,5 @@
+#!/bin/sh
+
+SOURCETYPE="AUR"
+SOURCEPATH="https://aur.archlinux.org/packages/an/android-sdk-platform-tools/android-sdk-platform-tools.tar.gz"
+
