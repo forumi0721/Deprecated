@@ -1,5 +1,6 @@
 post_install() {
 	 sed -i "s/^#display-setup-script=/display-setup-script=\/etc\/lightdm\/display-setup-script.sh/g" /etc/lightdm/lightdm.conf 
+	 sed -i "s/^#xserver-command=X/xserver-command=X -s 0 dpms/g" /etc/lightdm/lightdm.conf
 	 sed -i "s/for f in \/etc\/X11\/xinit\/xinitrc.d\/?*.sh ; do/for f in \/etc\/X11\/xinit\/xinitrc.d\/?* ; do/g" /etc/X11/xinit/xinitrc 
 
 	if [ -e /usr/share/xsessions/kodi.desktop ] && [ -e /usr/share/xsessions/xbmc.desktop ]; then
@@ -17,6 +18,7 @@ post_upgrade() {
 
 post_remove() {
 	sed -i "s/^display-setup-script=\/etc\/lightdm\/display-setup-script.sh/#display-setup-script=/g" /etc/lightdm/lightdm.conf 
+	 sed -i "s/^xserver-command=X -s 0 dpms/#xserver-command=X/g" /etc/lightdm/lightdm.conf
 	sed -i "s/for f in \/etc\/X11\/xinit\/xinitrc.d\/?* ; do/for f in \/etc\/X11\/xinit\/xinitrc.d\/?*.sh ; do/g" /etc/X11/xinit/xinitrc 
 
 	if [ -e /usr/share/xsessions/kodi.desktop ] && [ ! -e /usr/share/xsessions/xbmc.desktop ]; then
