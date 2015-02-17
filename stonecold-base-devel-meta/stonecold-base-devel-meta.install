@@ -1,5 +1,5 @@
 post_install() {
-	 sed -i "s/^DISTCC_ARGS=\"--allow 127.0.0.1\"/DISTCC_ARGS=\"--user nobody --allow 192.168.0.0\/24\"/g" /etc/conf.d/distcc
+	 sed -i "s/^DISTCC_ARGS=\"--allow 127.0.0.1\"/DISTCC_ARGS=\"--user nobody --allow 192.168.0.0\/24\"/g" /etc/conf.d/distccd
 }
 
 pre_upgrade() {
@@ -11,5 +11,5 @@ post_upgrade() {
 }
 
 post_remove() {
-	 sed -i "s/^DISTCC_ARGS=\"--user nobody --allow 192.168.0.0\/24\"/DISTCC_ARGS=\"--allow 127.0.0.1\"/g" /etc/conf.d/distcc
+	 sed -i "s/^DISTCC_ARGS=\"--user nobody --allow 192.168.0.0\/24\"/DISTCC_ARGS=\"--allow 127.0.0.1\"/g" /etc/conf.d/distccd
 }
