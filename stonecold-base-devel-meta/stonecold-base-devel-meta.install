@@ -1,5 +1,6 @@
 post_install() {
 	 sed -i "s/^DISTCC_ARGS=\"--allow 127.0.0.1\"/DISTCC_ARGS=\"--user nobody --allow 192.168.0.0\/24\"/g" /etc/conf.d/distccd
+	 sed -i "s/^#disallow-other-stacks=no/disallow-other-stacks=yes/g" /etc/avahi/avahi-daemon.conf
 }
 
 pre_upgrade() {
@@ -12,4 +13,5 @@ post_upgrade() {
 
 post_remove() {
 	 sed -i "s/^DISTCC_ARGS=\"--user nobody --allow 192.168.0.0\/24\"/DISTCC_ARGS=\"--allow 127.0.0.1\"/g" /etc/conf.d/distccd
+	 sed -i "s/^disallow-other-stacks=yes/#disallow-other-stacks=no/g" /etc/avahi/avahi-daemon.conf
 }
