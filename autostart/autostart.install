@@ -1,0 +1,17 @@
+post_install() {
+	echo "To use the autostart service, please run the following command:"
+	echo " # systemctl enable autostart.service"
+	echo ""
+	echo "The following path is the path where settings are stored"
+	echo " /etc/autostart.d"
+}
+
+post_upgrade() {
+	if [ -e /etc/systemd/system/multi-user.target.wants/autostart.service ]; then
+		systemctl daemon-reload
+	fi
+}
+
+post_remove() {
+	rm -rf /etc/systemd/system/multi-user.target.wants/autostart.service
+}

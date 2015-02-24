@@ -1,0 +1,41 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+_localpkgver=Y
+pkgname=("ttf-bitstream-vera-sans-mono")
+pkgver=20150224.1
+pkgrel=1
+pkgdesc="Bitstream vera sans mono font"
+arch=("any")
+url="http://www-old.gnome.org/fonts/"
+license=("custom")
+depends=("fontconfig" "xorg-fonts-encodings" "xorg-font-utils")
+provides=("ttf-font")
+install="${pkgname}.install"
+source=("${pkgname}.tar.xz")
+md5sums=("cdbab17512eea843e74bad7298a1aa00")
+
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
+
+package() {
+	install -dm0755 "${pkgdir}"/usr/share/fonts/TTF
+	install -Dm0644 "${srcdir}"/*.ttf "${pkgdir}"/usr/share/fonts/TTF/
+}
+
+# vim:set ts=2 sw=2 et:

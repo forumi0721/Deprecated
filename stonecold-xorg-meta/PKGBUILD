@@ -1,0 +1,76 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+_localpkgver=Y
+pkgname=("stonecold-xorg-meta")
+pkgver=20150224.1
+pkgrel=1
+pkgdesc="Install xorg packages"
+arch=("x86_64" "armv7h")
+url="http://localhost/"
+license=("custom")
+depends=(
+  "gvfs"
+  "gvfs-afp"
+  "gvfs-mtp"
+  "gvfs-smb"
+  "lightdm"
+  "lightdm-gtk3-greeter"
+  "pygtk"
+  "tango-icon-theme"
+  "tigervnc"
+  "ttf-bitstream-vera-sans-mono"
+  "ttf-nanum-fonts"
+  "ttf-win81-fonts-korean"
+  "wxgtk2.8"
+)
+depends+=(
+  "chromium"
+  "gimp"
+  "gvim"
+  "libreoffice-fresh"
+  "libreoffice-fresh-ko"
+  "nabi-git"
+  "sylpheed"
+)
+depends_x86_64+=(
+  "chromium-pepper-flash"
+  "kodi"
+  "kodi-pvr-addons"
+)
+depends_armv7h+=(
+  "xbmc-a10-bin"
+  "xbmc-pvr-addons-a10-git"
+)
+install="${pkgname}.install"
+source=("etc.tar.xz")
+md5sums=("SKIP")
+
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
+
+package() {
+  install -dm0755 "${pkgdir}"/etc/
+  install -Dm0644 "${srcdir}"/etc/xprofile "${pkgdir}"/etc/
+
+  install -dm0755 "${pkgdir}"/etc/lightdm
+  install -Dm0755 "${srcdir}"/etc/lightdm/display-setup-script.sh "${pkgdir}"/etc/lightdm/
+  install -Dm0600 "${srcdir}"/etc/lightdm/vncpasswd "${pkgdir}"/etc/lightdm/
+}
+
+# vim:set ts=2 sw=2 et:

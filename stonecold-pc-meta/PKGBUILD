@@ -1,0 +1,45 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+_localpkgver=Y
+pkgname=("stonecold-pc-meta")
+pkgver=20150224.1
+pkgrel=1
+pkgdesc="Install pc packages"
+arch=("x86_64")
+url="http://localhost/"
+license=("custom")
+depends=(
+  "efibootmgr"
+  "grub"
+  "linux-headers"
+)
+depends+=(
+  "acpid"
+  "cpupower"
+  "thermald"
+)
+
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
+
+package() {
+  echo > /dev/null
+}
+
+# vim:set ts=2 sw=2 et:

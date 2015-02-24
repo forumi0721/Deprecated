@@ -1,0 +1,11 @@
+[Unit]
+Description=KMS emulator
+After=syslog.target network.target
+
+[Service]
+Type=forking
+
+ExecStart=/usr/bin/vlmcsd -p /var/run/vlmcsd.pid -P 1688
+
+[Install]
+WantedBy=multi-user.target

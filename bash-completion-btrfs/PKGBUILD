@@ -1,0 +1,38 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+_localpkgver=Y
+pkgname=("bash-completion-btrfs")
+pkgver=20150224.1
+pkgrel=1
+pkgdesc="Programmable completion for the bash shell (btrfs)"
+arch=("any")
+license=("GPL")
+depends=("bash" "bash-completion" "btrfs-progs")
+source=("btrfs")
+md5sums=("74a506cb86f32a508e1df5a4598e416b")
+
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
+
+package() {
+	install -dm0755 "${pkgdir}"/usr/share/bash-completion/completions/
+	install -Dm0644 "${srcdir}"/btrfs "${pkgdir}"/usr/share/bash-completion/completions/
+}
+
+# vim:set ts=2 sw=2 et:

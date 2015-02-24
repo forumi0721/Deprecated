@@ -1,0 +1,133 @@
+pre_install() {
+	rm -rf /etc/ssh/ssh_host*
+	post_remove
+}
+
+post_install() {
+	#locale
+	sed -i "s/^#ko_KR.UTF-8 UTF-8/ko_KR.UTF-8 UTF-8/g" /etc/locale.gen
+	locale-gen
+
+	#localtime
+	rm -rf /etc/localtime
+	ln -sf ../usr/share/zoneinfo/Asia/Seoul /etc/localtime
+
+	#bashrc
+	if [ -z "$(grep "bash.bashrc2" /etc/bash.bashrc)" ]; then
+		echo "[ -r /etc/bash.bashrc2  ] && . /etc/bash.bashrc2" >> /etc/bash.bashrc
+	fi
+	sed -i "s/^\(alias .*\)$/#\1/g" /etc/skel/.bashrc
+	sed -i "s/^\(PS1=.*\)$/#\1/g" /etc/skel/.bashrc
+	while read pw
+	do
+		local h="$(echo ${pw} | cut -d ':' -f 6)"
+		if [ "${h}" != "/" ]; then
+			if [ -e "${h}/.bashrc" ]; then
+				for s in $(find /etc/skel/ -type f)
+				do
+					if [ ! -e "${h}/$(basename ${h})" ]; then
+						cp ${s} ${h}/ 
+					fi
+				done
+				sed -i "s/^\(alias .*\)$/#\1/g" ${h}/.bashrc
+				sed -i "s/^\(PS1=.*\)$/#\1/g" ${h}/.bashrc
+			fi
+		fi
+	done < /etc/passwd
+
+	#vimrc
+	if [ -z "$(grep "vimrc2" /etc/vimrc)" ]; then
+		echo "source /etc/vimrc2" >> /etc/vimrc
+	fi
+
+	#screenrc
+	sed -i "s/^#startup_message off/startup_message off/g" /etc/screenrc
+
+	#yaourtrc
+	sed -i "s/^#TMPDIR=\"\/tmp\"/TMPDIR=\"\/var\/tmp\"/g" /etc/yaourtrc
+
+	#hd-idle
+	sed -i "s/^START_HD_IDLE=false/START_HD_IDLE=true/g" /etc/conf.d/hd-idle
+	sed -i "s/^#HD_IDLE_OPTS=\"-i 180 -l \/var\/log\/hd-idle.log\"/HD_IDLE_OPTS=\"-i 1800 -l \/var\/log\/hd-idle.log\"/g" /etc/conf.d/hd-idle
+
+	#arch-chroot
+	if [ ! -z "$(uname -m | grep arm)" ]; then
+		sed -i "s/^SHELL=\/bin\/sh unshare --fork --pid chroot \"\$chrootdir\" \"\$@\"/SHELL=\/bin\/sh unshare --fork chroot \"\$chrootdir\" \"\$@\"/g" /usr/bin/arch-chroot
+	fi
+
+	#default service
+	systemctl enable systemd-networkd.service
+	systemctl enable systemd-resolved.service
+	systemctl enable systemd-timesyncd.service
+	systemctl enable fstrim.timer
+	systemctl enable sshd.service
+	systemctl enable autostart.service
+	systemctl enable haveged.service
+	systemctl enable hd-idle.service
+}
+
+pre_upgrade() {
+	pre_install
+}
+
+post_upgrade() {
+	post_install
+}
+
+post_remove() {
+	#locale
+	sed -i "s/^ko_KR.UTF-8 UTF-8/#ko_KR.UTF-8 UTF-8/g" /etc/locale.gen
+	locale-gen
+
+	#localtime
+	rm -rf /etc/localtime
+
+	#bashrc
+	sed -i '/bash.bashrc2/d' /etc/bash.bashrc
+	sed -i "s/^#\(alias .*\)$/\1/g" /etc/skel/.bashrc
+	sed -i "s/^#\(PS1=.*\)$/\1/g" /etc/skel/.bashrc
+	while read pw
+	do
+		local h="$(echo ${pw} | cut -d ':' -f 6)"
+		if [ "${h}" != "/" ]; then
+			if [ -e "${h}/.bashrc" ]; then
+				for s in $(find /etc/skel/ -type f)
+				do
+					if [ ! -e "${h}/$(basename ${h})" ]; then
+						cp ${s} ${h}/ 
+					fi
+				done
+				sed -i "s/^#\(alias .*\)$/\1/g" ${h}/.bashrc
+				sed -i "s/^#\(PS1=.*\)$/\1/g" ${h}/.bashrc
+			fi
+		fi
+	done < /etc/passwd
+
+	#vimrc
+	sed -i '/vimrc2/d' /etc/vimrc
+
+	#screenrc
+	sed -i "s/^startup_message off/#startup_message off/g" /etc/screenrc
+
+	#yaourtrc
+	sed -i "s/^TMPDIR=\"\/var\/tmp\"/#TMPDIR=\"\/tmp\"/g" /etc/yaourtrc
+
+	#hd-idle
+	sed -i "s/^START_HD_IDLE=true/START_HD_IDLE=false/g" /etc/conf.d/hd-idle
+	sed -i "s/^HD_IDLE_OPTS=\"-i 1800 -l \/var\/log\/hd-idle.log\"/#HD_IDLE_OPTS=\"-i 180 -l \/var\/log\/hd-idle.log\"/g" /etc/conf.d/hd-idle
+
+	#arch-chroot
+	if [ ! -z "$(uname -m | grep arm)" ]; then
+		sed -i "s/^SHELL=\/bin\/sh unshare --fork chroot \"\$chrootdir\" \"\$@\"/SHELL=\/bin\/sh unshare --fork --pid chroot \"\$chrootdir\" \"\$@\"/g" /usr/bin/arch-chroot
+	fi
+
+	#default service
+	systemctl disable systemd-networkd.service
+	systemctl disable systemd-resolved.service
+	systemctl disable systemd-timesyncd.service
+	systemctl disable fstrim.timer
+	systemctl disable sshd.service
+	systemctl disable autostart.service
+	systemctl disable haveged.service
+	systemctl disable hd-idle.service
+}

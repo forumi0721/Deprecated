@@ -1,0 +1,29 @@
+post_install() {
+	 sed -i "s/^DISTCC_ARGS=\"--allow 127.0.0.1\"/DISTCC_ARGS=\"--user nobody --allow 192.168.0.0\/24\"/g" /etc/conf.d/distccd
+
+	 if [ "$(uname -m)" = "x86_64" ]; then
+		 systemctl enable distccd.service
+		 systemctl enable distccd-armv5.service
+		 systemctl enable distccd-armv6h.service
+		 systemctl enable distccd-armv7h.service
+	 fi
+}
+
+pre_upgrade() {
+	post_remove
+}
+
+post_upgrade() {
+	post_install
+}
+
+post_remove() {
+	 sed -i "s/^DISTCC_ARGS=\"--user nobody --allow 192.168.0.0\/24\"/DISTCC_ARGS=\"--allow 127.0.0.1\"/g" /etc/conf.d/distccd
+
+	 if [ "$(uname -m)" = "x86_64" ]; then
+		 systemctl disable distccd.service
+		 systemctl disable distccd-armv5.service
+		 systemctl disable distccd-armv6h.service
+		 systemctl disable distccd-armv7h.service
+	 fi
+}

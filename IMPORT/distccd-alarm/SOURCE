@@ -1,0 +1,25 @@
+#!/bin/sh
+
+SOURCETYPE="SVN"
+SOURCEPATH="https://github.com/WarheadsSE/PKGs/trunk/distccd-alarm"
+
+function GetSourcePatch {
+	local md5sum_armv5_org=$(md5sum distccd-armv5.conf | cut -d ' ' -f 1)
+	sed -i "s/192.168.11.0\/24/192.168.0.0\/24/g" distccd-armv5.conf
+	sed -i "s/3632/36325/g" distccd-armv5.conf
+	local md5sum_armv5_to=$(md5sum distccd-armv5.conf | cut -d ' ' -f 1)
+	sed -i "s/${md5sum_armv5_org}/${md5sum_armv5_to}/g" PKGBUILD
+
+	local md5sum_armv6h_org=$(md5sum distccd-armv6h.conf | cut -d ' ' -f 1)
+	sed -i "s/192.168.11.0\/24/192.168.0.0\/24/g" distccd-armv6h.conf
+	sed -i "s/3633/36326/g" distccd-armv6h.conf
+	local md5sum_armv6h_to=$(md5sum distccd-armv6h.conf | cut -d ' ' -f 1)
+	sed -i "s/${md5sum_armv6h_org}/${md5sum_armv6h_to}/g" PKGBUILD
+
+	local md5sum_armv7h_org=$(md5sum distccd-armv7h.conf | cut -d ' ' -f 1)
+	sed -i "s/192.168.11.0\/24/192.168.0.0\/24/g" distccd-armv7h.conf
+	sed -i "s/3634/36327/g" distccd-armv7h.conf
+	local md5sum_armv7h_to=$(md5sum distccd-armv7h.conf | cut -d ' ' -f 1)
+	sed -i "s/${md5sum_armv7h_org}/${md5sum_armv7h_to}/g" PKGBUILD
+}
+

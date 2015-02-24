@@ -1,0 +1,19 @@
+post_install() {
+	systemctl enable acpid.service
+	systemctl enable cpupower.service
+	systemctl enable thermald.service
+}
+
+pre_upgrade() {
+	post_remove
+}
+
+post_upgrade() {
+	post_install
+}
+
+post_remove() {
+	systemctl disable acpid.service
+	systemctl disable cpupower.service
+	systemctl disable thermald.service
+}

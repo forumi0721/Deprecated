@@ -1,0 +1,49 @@
+# Maintainer: StoneCold <forumi0721[at]gmail[dot]com>
+
+_localpkgver=Y
+pkgname=("stonecold-xorg-i915-meta")
+pkgver=20150224.1
+pkgrel=1
+pkgdesc="Install xorg i915 packages"
+arch=("x86_64")
+url="http://localhost/"
+license=("custom")
+depends=(
+  "libva-intel-driver"
+  "libvdpau-va-gl"
+)
+source=("etc_x86_64.tar.xz")
+md5sums=("SKIP")
+
+pkgver() {
+  local ldate="$(date +'%Y%m%d')"
+  local lrevision=0
+  local lrevision2=0
+  local larch=${arch}
+  if [ "${larch}" != "any" ]; then
+    larch="${CARCH}"
+  fi
+  for file in $(ls "${startdir}"/${pkgname}-${ldate}.*-${pkgrel}-${larch}.pkg.* 2> /dev/null)
+  do
+    lrevision2="$(echo $(basename "${file}") | sed -e "s/${pkgname}-${ldate}.//g" -e "s/-${pkgrel}-${larch}.pkg\..*//g" 2> /dev/null)"
+    if [ "${lrevision2}" > 0 ] && [ "${lrevision}" -lt "${lrevision2}" ]; then
+      lrevision=${lrevision2}
+    fi
+  done
+  lrevision=$(($lrevision + 1))
+  echo "${ldate}.${lrevision}"
+}
+
+package() {
+  install -dm0755 "${pkgdir}"/etc/modprobe.d
+  install -Dm0644 "${srcdir}"/etc/modprobe.d/i915.conf "${pkgdir}"/etc/modprobe.d/
+
+  install -dm0755 "${pkgdir}"/etc/profile.d
+  install -Dm0755 "${srcdir}"/etc/profile.d/libva_driver_name.sh "${pkgdir}"/etc/profile.d/
+  install -Dm0755 "${srcdir}"/etc/profile.d/vdpau_driver.sh "${pkgdir}"/etc/profile.d/
+
+  install -dm0755 "${pkgdir}"/etc/X11/xorg.conf.d
+  install -Dm0644 "${srcdir}"/etc/X11/xorg.conf.d/20-intel.conf "${pkgdir}"/etc/X11/xorg.conf.d/
+}
+
+# vim:set ts=2 sw=2 et:
