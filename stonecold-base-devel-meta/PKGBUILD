@@ -21,7 +21,7 @@ depends=(
   "subversion"
 )
 depends_x86_64+=(
-  "distccd-alarm-arm"
+  "distccd-alarm-armv5"
   "distccd-alarm-armv6h"
   "distccd-alarm-armv7h"
 )
