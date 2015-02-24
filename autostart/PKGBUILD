@@ -11,7 +11,7 @@ depends=("sh" "findutils")
 install="${pkgname}.install"
 source=(
   "autostart.service"
-	"autostart.sh"
+  "autostart.sh"
 )
 md5sums=(
   "b51193372dd5c807320759d44d16d522"
@@ -38,13 +38,13 @@ pkgver() {
 }
 
 package() {
-	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
-	install -Dm0644 "${srcdir}"/autostart.service "${pkgdir}"/usr/lib/systemd/system/
+  install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+  install -Dm0644 "${srcdir}"/autostart.service "${pkgdir}"/usr/lib/systemd/system/
 
-	install -dm0755 "${pkgdir}"/usr/bin
-	install -Dm0755 "${srcdir}"/autostart.sh "${pkgdir}"/usr/bin/
+  install -dm0755 "${pkgdir}"/usr/bin
+  install -Dm0755 "${srcdir}"/autostart.sh "${pkgdir}"/usr/bin/
 
-	install -dm0755 "${pkgdir}"/etc/autostart.d
+  install -dm0755 "${pkgdir}"/etc/autostart.d
 }
 
 # vim:set ts=2 sw=2 et:

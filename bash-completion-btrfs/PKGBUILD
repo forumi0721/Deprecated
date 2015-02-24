@@ -31,8 +31,8 @@ pkgver() {
 }
 
 package() {
-	install -dm0755 "${pkgdir}"/usr/share/bash-completion/completions/
-	install -Dm0644 "${srcdir}"/btrfs "${pkgdir}"/usr/share/bash-completion/completions/
+  install -dm0755 "${pkgdir}"/usr/share/bash-completion/completions/
+  install -Dm0644 "${srcdir}"/btrfs "${pkgdir}"/usr/share/bash-completion/completions/
 }
 
 # vim:set ts=2 sw=2 et:

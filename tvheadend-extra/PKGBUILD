@@ -38,27 +38,27 @@ pkgver() {
 }
 
 package() {
-	install -dm0755 "${pkgdir}"/usr/share/tvheadend/data/dvb-scan/atsc
-	install -Dm0644 "${srcdir}"/kr-*-frequencies-* "${pkgdir}"/usr/share/tvheadend/data/dvb-scan/atsc/
+  install -dm0755 "${pkgdir}"/usr/share/tvheadend/data/dvb-scan/atsc
+  install -Dm0644 "${srcdir}"/kr-*-frequencies-* "${pkgdir}"/usr/share/tvheadend/data/dvb-scan/atsc/
 
-	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
-	install -Dm0644 "${srcdir}"/mc2xml/usr/lib/systemd/system/mc2xml.service "${pkgdir}"/usr/lib/systemd/system/
-	install -Dm0644 "${srcdir}"/mc2xml/usr/lib/systemd/system/mc2xml.timer "${pkgdir}"/usr/lib/systemd/system
+  install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+  install -Dm0644 "${srcdir}"/mc2xml/usr/lib/systemd/system/mc2xml.service "${pkgdir}"/usr/lib/systemd/system/
+  install -Dm0644 "${srcdir}"/mc2xml/usr/lib/systemd/system/mc2xml.timer "${pkgdir}"/usr/lib/systemd/system
 
-	install -dm0755 "${pkgdir}"/usr/bin
-	install -Dm0755 "${srcdir}"/mc2xml/usr/bin/tv_grab_mc2xml "${pkgdir}"/usr/bin/
+  install -dm0755 "${pkgdir}"/usr/bin
+  install -Dm0755 "${srcdir}"/mc2xml/usr/bin/tv_grab_mc2xml "${pkgdir}"/usr/bin/
 
-	install -dm0755 "${pkgdir}"/var/mc2xml
-	install -Dm0755 "${srcdir}"/mc2xml/var/mc2xml/mc2xml.sh "${pkgdir}"/var/mc2xml/
-	install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_U+_TV.dat "${pkgdir}"/var/mc2xml/
-	install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_U+_TV.chl "${pkgdir}"/var/mc2xml/
-	install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_U+_TV.ren "${pkgdir}"/var/mc2xml/
-	install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/xmltv_U+_TV.xml.gz "${pkgdir}"/var/mc2xml/
-	install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_C\&M.dat "${pkgdir}"/var/mc2xml/
-	install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_C\&M.chl "${pkgdir}"/var/mc2xml/
-	install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_C\&M.ren "${pkgdir}"/var/mc2xml/
-	install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/xmltv_C\&M.xml.gz "${pkgdir}"/var/mc2xml/
-	install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/xmltv.xml.gz "${pkgdir}"/var/mc2xml/
+  install -dm0755 "${pkgdir}"/var/mc2xml
+  install -Dm0755 "${srcdir}"/mc2xml/var/mc2xml/mc2xml.sh "${pkgdir}"/var/mc2xml/
+  install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_U+_TV.dat "${pkgdir}"/var/mc2xml/
+  install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_U+_TV.chl "${pkgdir}"/var/mc2xml/
+  install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_U+_TV.ren "${pkgdir}"/var/mc2xml/
+  install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/xmltv_U+_TV.xml.gz "${pkgdir}"/var/mc2xml/
+  install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_C\&M.dat "${pkgdir}"/var/mc2xml/
+  install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_C\&M.chl "${pkgdir}"/var/mc2xml/
+  install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/mc2xml_C\&M.ren "${pkgdir}"/var/mc2xml/
+  install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/xmltv_C\&M.xml.gz "${pkgdir}"/var/mc2xml/
+  install -Dm0644 "${srcdir}"/mc2xml/var/mc2xml/xmltv.xml.gz "${pkgdir}"/var/mc2xml/
 }
 
 # vim:set ts=2 sw=2 et:

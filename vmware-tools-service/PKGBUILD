@@ -31,8 +31,8 @@ pkgver() {
 }
 
 package() {
-	install -dm0755 "${pkgdir}"/usr/lib/systemd/system
-	install -Dm0644 "${srcdir}"/vmware-tools.service "${pkgdir}"/usr/lib/systemd/system/
+  install -dm0755 "${pkgdir}"/usr/lib/systemd/system
+  install -Dm0644 "${srcdir}"/vmware-tools.service "${pkgdir}"/usr/lib/systemd/system/
 }
 
 # vim:set ts=2 sw=2 et:

@@ -35,8 +35,8 @@ pkgver() {
 }
 
 package() {
-	install -dm0755 "${pkgdir}"/usr/share/fonts/TTF
-	install -Dm0644 "${srcdir}"/*.ttf "${pkgdir}"/usr/share/fonts/TTF/
+  install -dm0755 "${pkgdir}"/usr/share/fonts/TTF
+  install -Dm0644 "${srcdir}"/*.ttf "${pkgdir}"/usr/share/fonts/TTF/
 }
 
 # vim:set ts=2 sw=2 et:
