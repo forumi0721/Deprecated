@@ -6,5 +6,7 @@ fel
 pio
 nand-part
 meminfo
+sunxi-meminfo-static
 *.o
 *.swp
+*~
